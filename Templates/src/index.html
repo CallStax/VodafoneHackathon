@@ -2,7 +2,8 @@
 <!--[if lte IE 6]><html class="preIE7 preIE8 preIE9"><![endif]-->
 <!--[if IE 7]><html class="preIE8 preIE9"><![endif]-->
 <!--[if IE 8]><html class="preIE9"><![endif]-->
-<!--[if gte IE 9]><!--><html><!--<![endif]-->
+<!--[if gte IE 9]><!-->
+	<html ng-app="app"><!--<![endif]-->
 	<head>
 		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -18,17 +19,7 @@
 	</nav>
 	<div class="container-fluid main-panel">
 		  <div class="container">
-			<h2>Home</h2>
-			<hr/>
-			<p class="lead">Welcome to the xxx platform.</p>
-			<p class="lead">This platform connects those in need with NGOs and businesses willing to help.</p>
-		  </div>
-		  <div class="buttons">
-			<button class="big">HELP ME!</button>
-		  </div>
-		  <div class="links">
-			<a href="#ngo">NGOs</a> | <a href="#ngo">Benefactors</a>
-		  </div>
+			<div ng-view></div>
 	</div>
 	<div class="footer">
 		<span class="footer-text">&copy; 2019 - Vodafone Malta Foundation | Hackathon March 2019 | Call Stax</span>
