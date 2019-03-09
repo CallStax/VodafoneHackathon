@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('Beneficiery').controller('RequestController', RequestController);
+    angular.module('Beneficiary').controller('RequestController', RequestController);
 
     RequestController.$inject = ['$scope'];
 

@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('Beneficiery').controller('SelfImprovementController', SelfImprovementController);
+    angular.module('Beneficiary').controller('SelfImprovementController', SelfImprovementController);
 
     SelfImprovementController.$inject = ['$scope'];
 

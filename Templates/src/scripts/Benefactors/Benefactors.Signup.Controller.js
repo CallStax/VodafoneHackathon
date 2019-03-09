@@ -1,7 +1,7 @@
 (function(){
     'use strict';
 
-    angular.module('Signup').controller('SignupController', SignupController);
+    angular.module('Benefactors').controller('SignupController', SignupController);
 
     SignupController.$inject = ['$scope'];
 

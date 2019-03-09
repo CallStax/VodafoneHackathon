@@ -30,7 +30,8 @@ module.exports = {
       filename: './index.html' //relative to root of the application
   }),
   new CopyWebpackPlugin([
-    { context: './src/scripts/', from: '**/*.html', to: './' }
+    { context: './src/scripts/', from: '**/*.html', to: './' },
+	{ context: './src/', from: 'assets/*', to: './' },
   ]),
        new webpack.HotModuleReplacementPlugin()
   ],
