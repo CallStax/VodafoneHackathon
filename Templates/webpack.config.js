@@ -14,7 +14,9 @@ module.exports = {
   },
   devServer: {
     contentBase: "./dist",
-	watchContentBase: true
+    watchContentBase: true,
+    writeToDisk: true,
+    hot: true
   },
   devtool: 'inline-source-map',
   plugins: [
@@ -29,7 +31,8 @@ module.exports = {
   }),
   new CopyWebpackPlugin([
     { context: './src/scripts/', from: '**/*.html', to: './' }
-  ])
+  ]),
+       new webpack.HotModuleReplacementPlugin()
   ],
   module: {
     rules: [

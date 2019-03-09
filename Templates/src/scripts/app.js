@@ -17,7 +17,7 @@ require('./Benefactors/Listofrequests.Module.js');
         $routeProvider
 
             // route for the home page
-            .when('/', {
+            .when('/Test', {
                 templateUrl : 'Home/Home.html',
                 controller  : 'HomeController'
             })
