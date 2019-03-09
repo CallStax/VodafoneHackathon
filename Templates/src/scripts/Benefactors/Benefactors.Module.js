@@ -1,9 +1,9 @@
 (function(){
     'use strict';
 
-    angular.module('Signup', []);
+    angular.module('Benefactors', []);
 }());
 
 
 // dependencies
-require('./Signup.Controller.js');
+require('./Benefactors.Signup.Controller.js');

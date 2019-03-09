@@ -1,15 +1,19 @@
 require('angular');
 require('angular-route');
+require('chart.js');
+require('angular-chart.js');
 
 // reference modules
 require('./Home/Home.Module.js');
-require('./Beneficiery/Beneficiery.Module.js');
+require('./Beneficiary/Beneficiary.Module.js');
+require('./Benefactors/Benefactors.Module.js');
+require('./NGOs/NGOs.Module.js');
 
 
 (function(){
     'use strict';
 
-    angular.module('app', ['ngRoute','Home', 'Beneficiery'])
+    angular.module('app', ['ngRoute', 'chart.js', 'Home', 'Benefactors', 'Beneficiary', 'NGOs'])
     .config(function($routeProvider, $locationProvider) {
         $locationProvider.hashPrefix('');
 
@@ -21,12 +25,16 @@ require('./Beneficiery/Beneficiery.Module.js');
                 controller: 'HomeController'
             })
             .when('/Beneficiery/Request', {
-                templateUrl: 'Beneficiery/Beneficiery.Request.html',
+                templateUrl: 'Beneficiary/Beneficiary.Request.html',
                 controller: 'RequestController'
             })
             .when('/Beneficiery/SelfImprovement', {
                 templateUrl: 'Beneficiery/Beneficiery.SelfImprovement.html',
                 controller: 'SelfImprovementController'
+            })
+            .when('/NGOs/Leaderboard', {
+                templateUrl: 'NGOs/NGOs.Leaderboard.html',
+                controller: 'NGOsLeaderboardController'
             });
     });
 }());

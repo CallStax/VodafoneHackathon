@@ -1,13 +1,13 @@
 (function(){
     'use strict';
 
-    angular.module('Beneficiery').controller('SelfImprovementController', SelfImprovementController);
+    angular.module('Beneficiary').controller('RequestController', RequestController);
 
-    SelfImprovementController.$inject = ['$scope'];
+    RequestController.$inject = ['$scope'];
 
-    function SelfImprovementController($scope){
+    function RequestController($scope){
         $scope.Home = '';
-
+        
         $scope.Web3 = new Web3(
             new Web3.providers.HttpProvider("http://127.0.0.1:8545"),
         );

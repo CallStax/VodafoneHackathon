@@ -1,7 +1,7 @@
 (function(){
     'use strict';
 
-    angular.module('Listofrequests').controller('ListofrequestsController', ListofrequestsController);
+    angular.module('Benefactors').controller('ListofrequestsController', ListofrequestsController);
 
     ListofrequestsController.$inject = ['$scope'];
 
