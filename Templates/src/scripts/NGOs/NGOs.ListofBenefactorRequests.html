@@ -1,0 +1,23 @@
+<h2>List of Onboarding Benefactor Requests</h2>
+<hr />
+
+<div class="container">
+	<table>
+		<tr>
+			<th>Name</th>
+			<th>Date</th>
+			<th>Service Needed</th>
+			<th>Accepeted</th>
+		</tr>
+		<tr ng-repeat="item in BenefactorRequests">
+			<td>{{item.Name}}</td>
+			<td>{{item.Date}}</td>
+			<td>{{item.ServiceOffer}}</td>
+			<td><input type="checkbox" ng-model="item.Accepted" />
+		</tr>
+	</table>
+</div>
+
+<div class="links">
+	<a href="#ngo">NGOs</a> | <a href="#ngo">Benefactors</a>
+</div>

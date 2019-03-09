@@ -1,7 +1,7 @@
 (function(){
     'use strict';
 
-    angular.module('Scorepage').controller('ScorepageController', ScorepageController);
+    angular.module('Benefactors').controller('ScorepageController', ScorepageController);
 
     ScorepageController.$inject = ['$scope'];
 

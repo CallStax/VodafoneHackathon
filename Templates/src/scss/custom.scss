@@ -9,6 +9,7 @@ $color-secondary: #7E685A;
 $color-tertiary: #C2B9B0;
 $color-primary-contrast: #AFD275;
 $color-font: white;
+$color-table-border: black;
 
 body{
 	background-color: $color-tertiary;
@@ -17,6 +18,20 @@ body{
 	/*font-family: 'Comfortaa', cursive;*/
 	/*font-family: 'Ubuntu', sans-serif;*/
 }
+
+table {
+    border: 1px solid $color-table-border;
+    table-layout: fixed;
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+th, td {
+    border: 1px solid $color-table-border;
+    width: 100px;
+}
+
 
 .buttons{
 	padding-top: 50px;

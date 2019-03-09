@@ -2,13 +2,20 @@
 <hr />
 
 <div class="container">
-    <ul>
-        <li>Request 1 <input type="checkbox" name="Request1" value="true"> Contribute </li>
-        <li>Request 2 <input type="checkbox" name="Request2" value="true"> Contribute </li>
-        <li>Request 3 <input type="checkbox" name="Request3" value="true"> Contribute </li>
-        <li>Request 4 <input type="checkbox" name="Request4" value="true"> Contribute </li>
-
-    </ul>
+    <table>
+        <tr>
+            <th>Description</th>
+            <th>NGO</th>
+            <th>Contribute</th>
+        </tr>
+        <tr ng-repeat="item in requestList">
+            <td>{{item.Description}}</td>
+            <td>{{item.NGO}}</td>
+            <td>
+                <button ng-click="contribute(item)">Provide</button>
+            </td>
+        </tr>
+    </table>
 </div>
 
 <div class="links">
