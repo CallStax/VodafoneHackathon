@@ -1,39 +1,36 @@
 const path = require("path");
 const webpack = require("webpack");
-const CleanWebpackPlugin = require('clean-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-
+const CleanWebpackPlugin = require("clean-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = {
-  entry: ["./src/index.js", "./src/scss/custom.scss"],
+  entry:  "./src/index.js",
   mode: "development",
   output: {
     filename: "bundle.js",
-    path: path.resolve(__dirname, "dist")
+    path: path.resolve(__dirname, "dist"),
+    publicPath: "/"
   },
   devServer: {
     contentBase: "./dist",
     watchContentBase: true,
     writeToDisk: true,
-    hot: true
+    publicPath: "/"
   },
-  devtool: 'inline-source-map',
+  devtool: "source-map",
   plugins: [
     new CleanWebpackPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
+    new CopyWebpackPlugin([
+      { context: "./src/scripts/", from: "**/*.html", to: "./" },
+      { from: "./src/assets", to: "assets" }
+    ]),
     new HtmlWebpackPlugin({
       hash: true,
-      title: 'My Awesome application',
-      header: 'Hello World',
-      template: './src/index.html',
-      filename: './index.html' //relative to root of the application
-  }),
-  new CopyWebpackPlugin([
-    { context: './src/scripts/', from: '**/*.html', to: './' },
-	{ context: './src/', from: 'assets/*', to: './' },
-  ]),
-       new webpack.HotModuleReplacementPlugin()
+      inject: "body",
+      template: "./src/index.html",
+      filename: "./index.html" //relative to root of the application
+    })
   ],
   module: {
     rules: [
@@ -42,32 +39,26 @@ module.exports = {
         use: [
           {
             // Adds CSS to the DOM by injecting a `<style>` tag
-            loader: 'style-loader'
+            loader: "style-loader"
           },
           {
             // Interprets `@import` and `url()` like `import/require()` and will resolve them
-            loader: 'css-loader'
+            loader: "css-loader"
           },
           {
             // Loader for webpack to process CSS with PostCSS
-            loader: 'postcss-loader',
+            loader: "postcss-loader",
             options: {
-              plugins: function () {
-                return [
-                  require('autoprefixer')
-                ];
+              plugins: function() {
+                return [require("autoprefixer")];
               }
             }
           },
           {
             // Loads a SASS/SCSS file and compiles it to CSS
-            loader: 'sass-loader'
+            loader: "sass-loader"
           }
         ]
-      },    
-      {
-        test: /\.(png|svg|jpg|gif)$/,
-        use: ["file-loader"]
       }
     ]
   }
