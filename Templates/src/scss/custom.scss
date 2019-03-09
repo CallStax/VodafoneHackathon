@@ -34,6 +34,20 @@ body{
 	}
 }
 
+table {
+    border: 1px solid $color-table-border;
+    table-layout: fixed;
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+th, td {
+    border: 1px solid $color-table-border;
+    width: 100px;
+}
+
+
 .buttons{
 	margin-top: 25px;
 	padding-bottom: 50px;

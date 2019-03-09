@@ -32,9 +32,27 @@ require('./NGOs/NGOs.Module.js');
                 templateUrl: 'Beneficiery/Beneficiery.SelfImprovement.html',
                 controller: 'SelfImprovementController'
             })
-            .when('/NGOs/Leaderboard', {
-                templateUrl: 'NGOs/NGOs.Leaderboard.html',
-                controller: 'NGOsLeaderboardController'
+            .when('/Benefactors/Signup', {
+                templateUrl: 'Benefactors/Benefactors.Signup.html',
+                controller: 'SignupController'
+            })
+            .when('/Benefactors/Scorepage', {
+                templateUrl: 'Benefactors/Benefactors.Scorepage.html',
+                controller: 'ScorepageController'
+            })
+            .when('/Benefactors/Listofrequests', {
+                templateUrl: 'Benefactors/Benefactors.Listofrequests.html',
+                controller: 'ListofrequestsController'
+            })
+            .when('/NGOs/Listofonboardingrequests', {
+                templateUrl: 'NGOs/NGOs.Listofonboardingrequests.html',
+                controller: 'ListofonboardingrequestsController'
+            })
+            .when('/NGOs/ListofBenefactorRequests', {
+                templateUrl: 'NGOs/NGOs.ListofBenefactorRequests.html',
+                controller: 'ListofonboardingrequestsController'
             });
     });
 }());
+
+

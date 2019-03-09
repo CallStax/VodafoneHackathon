@@ -5,8 +5,24 @@
 
     ListofrequestsController.$inject = ['$scope'];
 
-    function ListofrequestsController($scope){
-        $scope.Home = '';
-    }
+    function ListofrequestsController($scope) {
+        $scope.requestList = [{
+            Description: 'I want food',
+            NGO: 'Millenium Chapel',
+            Contribute: null
+        },
+        {
+            Description: 'I want money',
+            NGO: 'Charitas',
+            Contribute: null
+        }];
+
+        $scope.selectedRequests = [];
+
+        $scope.contribute = function (el) {
+            $scope.selectedRequests.push(el);           
+        };
+    };      
+
 
 }());
