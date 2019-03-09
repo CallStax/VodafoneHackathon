@@ -5,30 +5,30 @@
 
     ListofrequestsController.$inject = ['$scope'];
 
-    $scope.TextData = {
-        h2: {
-            en: 'List of Requests',
-            mt: 'Lista ta\' Talbiet'
-        },
-        th1: {
-            en: 'Description',
-            mt: 'Deskrizzjoni'
-        },
-        th2: {
-            en: 'NGO',
-            mt: 'NGO'
-        },
-        th3: {
-            en: 'Contribute',
-            mt: 'Jikkontribwixxu'
-        },
-        button: {
-            en: 'Provide',
-            mt: 'Ipprovdi'
-        }
-    };
-
     function ListofrequestsController($scope) {
+		$scope.TextData = {
+			h2: {
+				en: 'List of Requests',
+				mt: 'Lista ta\' Talbiet'
+			},
+			th1: {
+				en: 'Description',
+				mt: 'Deskrizzjoni'
+			},
+			th2: {
+				en: 'NGO',
+				mt: 'NGO'
+			},
+			th3: {
+				en: 'Contribute',
+				mt: 'Jikkontribwixxu'
+			},
+			button: {
+				en: 'Provide',
+				mt: 'Ipprovdi'
+			}
+		};
+	
         $scope.requestList = [{
             Description: 'I want food',
             NGO: 'Millenium Chapel',
