@@ -44,13 +44,21 @@ require('./NGOs/NGOs.Module.js');
                 templateUrl: 'Benefactors/Benefactors.Listofrequests.html',
                 controller: 'ListofrequestsController'
             })
-            .when('/NGOs/Listofonboardingrequests', {
-                templateUrl: 'NGOs/NGOs.Listofonboardingrequests.html',
-                controller: 'ListofonboardingrequestsController'
+            .when('/NGOs/Leaderboard', {
+                templateUrl: 'NGOs/NGOs.Leaderboard.html',
+                controller: 'NGOsLeaderboardController'
+            })
+            .when('/NGOs/ListOnboardingRequests', {
+                templateUrl: 'NGOs/NGOs.ListOnboardingRequests.html',
+                controller: 'ListOnboardingRequestsController'
             })
             .when('/NGOs/ListofBenefactorRequests', {
                 templateUrl: 'NGOs/NGOs.ListofBenefactorRequests.html',
-                controller: 'ListofonboardingrequestsController'
+                controller: 'ListOnboardingRequestsController'
+            })
+            .when('/NGOs/ListofBeneficiaryRequests', {
+                templateUrl: 'NGOs/NGOs.ListofBeneficiaryRequests.html',
+                controller: 'ListOnboardingRequestsController'
             });
     });
 }());

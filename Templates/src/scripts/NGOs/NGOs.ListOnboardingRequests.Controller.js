@@ -1,11 +1,11 @@
 (function () {
     'use strict';
 
-    angular.module('NGOs').controller('ListofonboardingrequestsController', ListofonboardingrequestsController);
+    angular.module('NGOs').controller('ListOnboardingRequestsController', ListOnboardingRequestsController);
 
-    ListofonboardingrequestsController.$inject = ['$scope'];
+    ListOnboardingRequestsController.$inject = ['$scope'];
 
-    function ListofonboardingrequestsController($scope) {
+    function ListOnboardingRequestsController($scope) {
         $scope.BenefeciaryRequests = [{
             Date: '25-02-2019',
             ServiceNeeded: 'Food',

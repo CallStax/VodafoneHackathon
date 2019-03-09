@@ -9,4 +9,4 @@
 // dependencies
 require('./NGOs.Service.js');
 require('./NGOs.Leaderboard.Controller.js');
-require('./NGOs.Listofonboardingrequests.Controller.js');
+require('./NGOs.ListOnboardingRequests.Controller');
