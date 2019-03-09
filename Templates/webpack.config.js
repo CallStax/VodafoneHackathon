@@ -16,8 +16,7 @@ module.exports = {
     contentBase: "./dist",
     watchContentBase: true,
     writeToDisk: true,
-    publicPath: "/",
-    stats: "verbose"
+    publicPath: "/"
   },
   devtool: "source-map",
   plugins: [
