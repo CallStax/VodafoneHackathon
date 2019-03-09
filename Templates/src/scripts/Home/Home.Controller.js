@@ -3,13 +3,12 @@
 
     angular.module('Home').controller('HomeController', HomeController);
 
-    HomeController.$inject = ['$scope'];
+    HomeController.$inject = ['$scope', 'SelectedLanguage'];
 
-    function HomeController($scope){
+    function HomeController($scope, SelectedLanguage){
         $scope.Home = '';
 
-        $scope.SelectedLanguage = 'mt';
-
+        $scope.SelectedLanguage = SelectedLanguage;
         $scope.TextData = 
             {
                 lead_top: {
@@ -26,8 +25,8 @@
                 },
                 buttons_p1: {
                     en: 'Your request will go to one of our NGOs who will reach out to you to assess your case and determine how best to help you.',
-                    mt: 'It-talba tiegħek se tingħata lil mill - NGOs tagħna li ser tevalwa l - każ tiegħek u tiddetermina kif l-aħjar tgħinek.'
-                }
+                    mt: 'It-talba tiegħek se tingħata lil NGOs tagħna li ser jevalwaw l - każ tiegħek u jiddeterminaw kif l-aħjar jgħinnuk.'
+                },
                 buttons_p2_beforeB: {
                     en: 'We appreciate that asking for help is not easy, which is why your ',
                     mt: 'Napprezzaw li t-talba għall-għajnuna mhix faċli, u għalhekk'
@@ -42,7 +41,7 @@
                 },
                 buttons_p3inB: {
                     en: 'At no point will you be asked to divulge any personal or sensitive information through the Application',
-                    mt: 'Qatt mhu se tintalab informazzjoni personali jew sensittiva permezz ta" din l-Applikazzjoni'
+                    mt: 'Qatt mhu se tintalab informazzjoni personali jew sensittiva permezz ta\' din l-Applikazzjoni'
                 },
                 buttons_p3AfterB: {
                     en: '(all we need is your public key). If in doubt, reach out to your nearest NGO center where you can',
@@ -50,7 +49,7 @@
                 },
                 buttons_p3inB2: {
                     en: 'speak to a representative who can guide you through the process.',
-                    mt: 'tkellem lil rappreżentant li jista" jiggwidak.'
+                    mt: 'tkellem lil rappreżentant li jista\' jiggwidak.'
                 },
                 buttons_p3AfterB2: {
                     en: 'We recommend you utilise a separate and unused account to get started.',
@@ -58,10 +57,15 @@
                 },
                 links_bottom: {
                     en: 'We are always on the lookout to grow our network of NGOs and Benefactors. If you think you can contribute, please sign up by following the links below.',
-                    mt: 'Jekk taħseb li tista" tikkontribwixxi f"din is-soċjeta, jekk jogħġbok irreġistra billi ssegwi l - links hawn taħt.'
+                    mt: 'Jekk taħseb li tista\' tikkontribwixxi f\'din is-soċjeta, jekk jogħġbok irreġistra billi ssegwi l - links hawn taħt.'
                 }
 
             };
+
+        $scope.ChangeLanguage = function () {
+            SelectedLanguage = 'mt';
+            console.log(SelectedLanguage);
+        }
     }
 
 }());
