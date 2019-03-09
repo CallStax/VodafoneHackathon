@@ -24,12 +24,12 @@ require('./NGOs/NGOs.Module.js');
                 templateUrl: 'Home/Home.html',
                 controller: 'HomeController'
             })
-            .when('/Beneficiery/Request', {
+            .when('/Beneficiary/Request', {
                 templateUrl: 'Beneficiary/Beneficiary.Request.html',
                 controller: 'RequestController'
             })
-            .when('/Beneficiery/SelfImprovement', {
-                templateUrl: 'Beneficiery/Beneficiery.SelfImprovement.html',
+            .when('/Beneficiary/SelfImprovement', {
+                templateUrl: 'Beneficiary/Beneficiary.SelfImprovement.html',
                 controller: 'SelfImprovementController'
             })
             .when('/Benefactors/Signup', {

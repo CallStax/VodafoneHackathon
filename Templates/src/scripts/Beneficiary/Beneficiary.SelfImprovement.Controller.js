@@ -1,17 +1,17 @@
-(function(){
+(function () {
     'use strict';
 
     angular.module('Beneficiary').controller('SelfImprovementController', SelfImprovementController);
 
     SelfImprovementController.$inject = ['$scope'];
 
-    function SelfImprovementController($scope){
-        $scope.Home = '';
-        
-        $scope.Web3 = new Web3(
-            new Web3.providers.HttpProvider("http://127.0.0.1:8545"),
-        );
-        console.log($scope.Web3.eth.accounts);
+    function SelfImprovementController($scope) {
+        $scope.AvailableCourses = [
+            "Course 1",
+            "Course 2",
+            "Course 3",
+            "Course 4"
+        ];
     }
 
 }());
