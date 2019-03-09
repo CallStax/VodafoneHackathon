@@ -4,19 +4,34 @@
 
 // Your variable overrides
 
-$color-primary: #E7717D;
-$color-secondary: #7E685A;
-$color-tertiary: #C2B9B0;
-$color-primary-contrast: #AFD275;
-$color-font: white;
-$color-table-border: black;
+$color-primary: rgb(230, 0, 0);
+$color-secondary: rgb(51, 51, 51);
+$color-tertiary: rgb(244, 244, 244);
+$color-primary-contrast: rgb(156, 42, 160);
+$color-font-bright: white;
+$color-font-dark: $color-secondary;
+
+$font-ubuntu: 'Ubuntu', sans-serif;
+$font-comfortaa: 'Comfortaa', cursive;
 
 body{
 	background-color: $color-tertiary;
-	color: white;
-	font-family: 'Ubuntu', sans-serif;
-	/*font-family: 'Comfortaa', cursive;*/
-	/*font-family: 'Ubuntu', sans-serif;*/
+	color: $color-font-dark;
+	font-family: $font-ubuntu;
+}
+
+.emphasise {
+	font-weight: 700;
+	font-size: 2vw;
+}
+
+.app-title{
+	cursor: pointer;
+	transition: all .5s ease-in-out;
+	
+	&:hover{
+		letter-spacing: 1px;
+	}
 }
 
 table {
@@ -34,8 +49,12 @@ th, td {
 
 
 .buttons{
-	padding-top: 50px;
+	margin-top: 25px;
 	padding-bottom: 50px;
+	
+	button {
+		margin-bottom: 25px;
+	}
 }
 
 .links{
@@ -66,12 +85,13 @@ button{
 	&:hover{
 		background-color: $color-primary;
 		box-shadow: 0px 15px 20px rgba(231, 113, 125, 0.4);
-		color: $color-font;
+		color: $color-font-bright;
 		transform: translateY(-7px);
 	}
 	
 	&:active{
 		background-color: $color-primary-contrast;
+		box-shadow: 0px 15px 20px $color-primary-contrast;
 	}
 	
 	&:focus, &:focus, &:focus{
@@ -80,7 +100,7 @@ button{
 }
 
 a {
-	color: white;
+	color: $color-font-dark;
 	text-decoration: underline;
 	
 	&:hover{
@@ -97,10 +117,12 @@ nav.heading {
 	color: white;
 	font-size: 2vw;
 	
-	background-color: $color-secondary;
+	background-color: $color-primary;
 	
 	padding-top: 5px;
 	padding-bottom: 5px;
+	
+	line-height: 4vw;
 	
 	-webkit-box-shadow: 0px 9px 41px -1px rgba(126,104,90,0.75);
 	-moz-box-shadow: 0px 9px 41px -1px rgba(126,104,90,0.75);
@@ -114,6 +136,10 @@ nav.heading {
 		display: inline-block;
 		font-size: 2vw;
 		font-weight: 700;
+		
+		.alternate-color{
+			color: $color-secondary;
+		}
 	}
 	
 	.menu {
@@ -124,9 +150,11 @@ nav.heading {
 }
 
 h2 {
+	color: $color-primary;
+	display: inline;
+	padding: 5px 25px 5px 25px;
 	font-size: 1.75rem;
 	margin-bottom: 25px;
-	text-shadow: 2px 2px 5px $color-secondary;
 	width: 100%;
 }
 
@@ -148,8 +176,22 @@ div.main-panel{
 	width: 100%;
 	text-align: center;
 	background-color: $color-secondary;
+	color: $color-font-bright;
 	padding-top: 5px;
 	padding-bottom: 5px;
 	font-size: 10px;
+	
+	a{
+		color: $color-font-bright;
+		
+		text-decoration: inherit;
+		
+		font-weight: 700;
+	}
 }
 
+.corporate-logo{
+	img {
+		width: 250px;
+	}
+}
