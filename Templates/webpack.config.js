@@ -12,7 +12,7 @@ module.exports = {
   },
   devServer: {
     contentBase: "./dist",
-    hot: true
+	watchContentBase: true
   },
   devtool: 'inline-source-map',
   plugins: [
