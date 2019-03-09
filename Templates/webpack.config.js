@@ -2,6 +2,8 @@ const path = require("path");
 const webpack = require("webpack");
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+
 
 module.exports = {
   entry: ["./src/index.js", "./src/scss/custom.scss"],
@@ -12,7 +14,9 @@ module.exports = {
   },
   devServer: {
     contentBase: "./dist",
-	watchContentBase: true
+    watchContentBase: true,
+    writeToDisk: true,
+    hot: true
   },
   devtool: 'inline-source-map',
   plugins: [
@@ -24,7 +28,11 @@ module.exports = {
       header: 'Hello World',
       template: './src/index.html',
       filename: './index.html' //relative to root of the application
-  })
+  }),
+  new CopyWebpackPlugin([
+    { context: './src/scripts/', from: '**/*.html', to: './' }
+  ]),
+       new webpack.HotModuleReplacementPlugin()
   ],
   module: {
     rules: [
