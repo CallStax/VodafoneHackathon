@@ -178,7 +178,7 @@ contract Ghajnuna{
     }
 
     //Functions for beneficeries
-    function registerBeneficiary(address beneficieryAddress, bytes32[] memory chosenIndustries) public {
+    function requestBeneficiary(address beneficieryAddress, bytes32[] memory chosenIndustries) public {
         beneficiaries[beneficieryAddress].beneficieryAddres = beneficieryAddress;
         beneficiaries[beneficieryAddress].industries = chosenIndustries;
         beneficiaries[beneficieryAddress].isSet = true;
@@ -250,11 +250,11 @@ contract Ghajnuna{
     }
 	
 	function getUserType() view public returns(uint) {
-		if (ngos[msg.sender].isSet){
+		if (ngos[msg.sender].isSet == true){
 			return 1;
-		} else if (benefactors[msg.sender].isSet){
+		} else if (benefactors[msg.sender].isSet == true){
 			return 2;
-		} else if (beneficiaries[msg.sender].isSet){
+		} else if (beneficiaries[msg.sender].isSet == true){
 			return 3;
 		} else {
 			return 0;

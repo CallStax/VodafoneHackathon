@@ -63,7 +63,14 @@ const deploy = async () => {
 	await contractInstance.methods.updateNGOIndustries([industries['CLOTHES'].Id, industries['HYGIENE'].Id]).send({from: accounts[1], gasLimit: 3000000});
 	
 	
+	const usertype0 = await contractInstance.methods.getUserType().call({from: accounts[0]});
+	console.log('userType0', usertype0);
 	
+	const usertype3 = await contractInstance.methods.getUserType().call({from: accounts[3]});
+	console.log('userType3', usertype3);
+	
+	const usertype6 = await contractInstance.methods.getUserType().call({from: accounts[6]});
+	console.log('userType6', usertype6);
 	
   console.log('Contract deployed to', contractAddress);
 };
