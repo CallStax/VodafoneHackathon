@@ -3,25 +3,16 @@
 
     angular.module('NGOs').controller('ListOnboardingRequestsController', ListOnboardingRequestsController);
 
-    ListOnboardingRequestsController.$inject = ['$scope'];
+    ListOnboardingRequestsController.$inject = ['$scope', 'NGOsService'];
 
-    function ListOnboardingRequestsController($scope) {
-        $scope.BenefeciaryRequests = [{
-            Date: '25-02-2019',
-            ServiceNeeded: 'Food',
-            Accepted: true
-        },
-        {
-            Date: '09-03-2019',
-            ServiceNeeded: 'Clothes',
-            Accepted: false
-        },
-        {
-            Date: '23-01-2019',
-            ServiceNeeded: 'Food',
-            Accepted: true
-        }];
-
+    function ListOnboardingRequestsController($scope, NGOsService) {
+        
+        NGOsService.getNGOApprovalsForBeneficiaries().then(function (response) {
+            $scope.$apply(function () {
+                $scope.BenefeciaryRequests = response;
+                console.log(response);
+            });
+        }); 
 
         $scope.BenefactorRequests = [{
             Name: 'Pama',

@@ -2,10 +2,11 @@
     'use strict';
 
     angular.module('Benefactors').controller('ListofrequestsController', ListofrequestsController);
+    
+    ListofrequestsController.$inject = ['$scope', 'BenefactorService'];
 
-    ListofrequestsController.$inject = ['$scope'];
+    function ListofrequestsController($scope, BenefactorService) {
 
-    function ListofrequestsController($scope) {
 		$scope.TextData = {
 			h2: {
 				en: 'List of Requests',
@@ -29,16 +30,12 @@
 			}
 		};
 	
-        $scope.requestList = [{
-            Description: 'I want food',
-            NGO: 'Millenium Chapel',
-            Contribute: null
-        },
-        {
-            Description: 'I want money',
-            NGO: 'Charitas',
-            Contribute: null
-        }];
+        BenefactorService.getRequests().then(function (response) {
+            $scope.$apply(function () {
+                $scope.requestList = response;
+                console.log(response);
+            });
+        });
 
         $scope.selectedRequests = [];
 
