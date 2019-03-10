@@ -1,4 +1,45 @@
-<h2>Test</h2>
+<h2>NGOs</h2>
 <hr />
 
-<p>{{ NGOs }}</p>
+<p>NGO's play a vital role in providing social justice services. <b>Ghajnu.na</b> makes their operation easier by fostering collaboration with full transparency, while ensuring that privacy is safeguarded as much as possible.</p> 
+<p>To Sign up, click the Register button below, where one of our leading NGOs will reach out to onboard you and explain how we can make a greater impact together.</p> 
+
+<form ng-submit="registerNgo()">
+    <div class="container-fluid main-panel">
+        <div class="container">
+			<table class="form">
+				<tr>
+					<td class="label"><label for="name">Name:</label></td><td class="field"><input ng-model="Benefactor.name" type="text" placeholder="Name" name="name" required></td>
+				</tr>
+				<tr>
+					<td class="label"><label for="surname">Surname:</label></td><td class="field"><input ng-model="Benefactor.surname" type="text" placeholder="Surname" name="surname" required></td>
+				</tr>
+				<tr>
+					<td class="label"><label for="companyName">Company Name:</label></td><td class="field"><input type="text" placeholder="Company Name" name="companyName" required></td>
+				</tr>
+				<tr>
+					<td class="label"><label for="email">Email:</label></td><td class="field"><input ng-model="Benefactor.email" type="text" placeholder="Email" name="email" required></td>
+				</tr>
+				<tr>				
+					<td class="label"><label for="number">Telephone Number:</label></td><td class="field"><input ng-model="Benefactor.phone" type="tel" placeholder="Telephone number" name="number" required></td>
+				</tr>
+				<tr>
+					<td class="label"><label for="number">Mobile Number:</label></td><td class="field"><input ng-model="Benefactor.mobile" type="tel" placeholder="Mobile number" name="number" required></td>
+				</tr>
+				<tr>
+					<td class="label">Select service offered:</td>
+					<td class="field">
+						<select ng-model="Benefactor.service" name="select" value="services">
+							<option>a</option>
+							<option>b</option>
+							<option>c</option>
+						</select>
+					</td>
+				</tr>			
+			</table>
+			<div class="buttons">
+				<button type="submit" id="registerButton" class="ng-binding">Register</button>
+			</div>
+        </div>
+    </div>
+</form>

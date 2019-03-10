@@ -22,7 +22,7 @@
 		
 		async function getNGOs() {
 			var result = await window.getInstance();
-			return result.ghajnunaContract.methods.getNGOs().call();	
+			return result.ghajnunaContract.methods.getNGOs().call({gasLimit: 3000000});	
 		 
 		}
     }
