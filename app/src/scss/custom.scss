@@ -1,0 +1,267 @@
+
+
+@import "node_modules/bootstrap/scss/bootstrap";
+
+// Your variable overrides
+
+$color-primary: rgb(230, 0, 0);
+$color-secondary: rgb(51, 51, 51);
+$color-tertiary: rgb(244, 244, 244);
+$color-primary-contrast: rgb(156, 42, 160);
+$color-font-bright: white;
+$color-font-dark: $color-secondary;
+
+$font-ubuntu: 'Ubuntu', sans-serif;
+$font-comfortaa: 'Comfortaa', cursive;
+
+body{
+	background-color: $color-tertiary;
+	color: $color-font-dark;
+	font-family: $font-ubuntu;
+}
+
+.emphasise {
+	font-weight: 700;
+	font-size: 2vw;
+}
+
+.app-title{
+	cursor: pointer;
+	transition: all .5s ease-in-out;
+	
+	&:hover{
+		letter-spacing: 1px;
+	}
+}
+
+table {
+    border: 1px solid $color-secondary;
+    table-layout: fixed;
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+th, td {
+    border: 1px solid $color-secondary;
+    width: 100px;
+}
+
+
+.buttons{
+	margin-top: 25px;
+	padding-bottom: 50px;
+	
+	button {
+		margin-bottom: 25px;
+	}
+}
+
+.links{
+	padding-top: 50px;
+	padding-bottom: 50px;
+}
+
+button{
+	font-family: 'Comfortaa', cursive;
+	
+	padding: 5px 10px 5px 10px;
+	border-radius: 8px;
+	
+	background-color: $color-primary;
+	color: white;
+
+	font-weight: 700;
+	
+	border: none;
+	
+	box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+	transition: all 0.3s ease 0s;
+	cursor: pointer;
+	outline: none;
+	
+	&.big{
+		padding: 15px 25px 15px 25px;
+		border-radius: 45px;
+		font-size: 2em;
+	}
+	
+	&:hover{
+		background-color: $color-primary;
+		box-shadow: 0px 15px 20px rgba(231, 113, 125, 0.4);
+		color: $color-font-bright;
+		transform: translateY(-7px);
+	}
+	
+	&:active{
+		background-color: $color-primary-contrast;
+		box-shadow: 0px 15px 20px $color-primary-contrast;
+	}
+	
+	&:focus, &:focus, &:focus{
+		outline: none;
+	}
+}
+
+a {
+	color: $color-font-dark;
+	text-decoration: underline;
+	
+	&:hover{
+		color: $color-primary;
+	}
+}
+
+nav.heading {
+	width: 100%;
+	display: block;	
+	text-align: center;
+
+	font-family: 'Ubuntu', sans-serif;
+	color: white;
+	font-size: 2vw;
+	
+	background-color: $color-primary;
+	
+	padding-top: 5px;
+	padding-bottom: 5px;
+	
+	line-height: 4vw;
+	
+	-webkit-box-shadow: 0px 9px 41px -1px rgba(126,104,90,0.75);
+	-moz-box-shadow: 0px 9px 41px -1px rgba(126,104,90,0.75);
+	box-shadow: 0px 9px 41px -1px rgba(126,104,90,0.75);
+	
+	&.float{
+		position: fixed;
+	}
+	
+	h1 {
+		display: inline-block;
+		font-size: 2vw;
+		font-weight: 700;
+		
+		.alternate-color{
+			color: $color-secondary;
+		}
+	}
+	
+	.menu {
+		position: absolute;
+		right: 0;
+		margin-right: 15px;
+	}
+}
+
+h2 {
+	color: $color-primary;
+	display: inline;
+	padding: 5px 25px 5px 25px;
+	font-size: 1.75rem;
+	margin-bottom: 25px;
+	width: 100%;
+}
+
+div.main-panel{
+	padding-top: 25px;
+	text-align: center;
+}
+
+@media screen and (max-width: 480px) {
+	nav.heading, nav.heading h1 {
+		font-size: 6vw;
+	}
+}
+
+.footer{
+	position: fixed;
+	bottom: 0;
+	left:0;
+	width: 100%;
+	text-align: center;
+	background-color: $color-secondary;
+	color: $color-font-bright;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	font-size: 10px;
+	
+	a{
+		color: $color-font-bright;
+		
+		text-decoration: inherit;
+		
+		font-weight: 700;
+	}
+}
+
+.corporate-logo{
+	img {
+		width: 250px;
+	}
+}
+
+.language {
+	font-size: 10px;
+	position: absolute;
+	right: 15px;
+	
+	img {
+		width: 25px;
+		height: 15px;
+		margin-left: 5px;
+		cursor: pointer;
+	}
+}
+
+table.item-list{
+	border: 0;
+	tr {
+		border: 0;
+				
+		td {
+			border: 0;
+		
+			&.label {
+				text-align: right;
+			}
+		
+			&.input {
+				padding-left: 15px;
+				text-align: left;
+			}
+		}
+	}
+}
+
+table.form{
+	width: 100%;
+	border: 0;
+	tr {
+		border: 0;
+		
+		td {
+			border: 0;
+		}
+		
+		td.label{
+			text-align: right;
+			padding-right: 10px;
+			font-weight: 400;
+			position: relative;
+			top: 3px;
+		}
+		
+		td.field {
+			padding-left: 10px;
+			text-align: left;
+			input, select {
+				width: 250px;
+			}
+		}
+	}
+}
+
+select {
+	display: block;
+	height: 30px;
+}

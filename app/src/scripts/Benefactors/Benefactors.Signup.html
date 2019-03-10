@@ -1,0 +1,30 @@
+<h2>Signup Form</h2>
+<hr />
+<p class="lead">Please fill in this form to create an account as a benefactor</p>
+
+<form>
+    <div class="container-fluid main-panel">
+        <div class="container">
+            <table class="form">
+                <tr>
+                    <td class="label"><label for="companyName">Company Name:</label></td>
+                    <td class="field"><input ng-model="Benefactor.name" type="text" placeholder="Company Name" name="companyName" required></td>
+                </tr>
+                <tr>
+                    <td class="label"><label for="email">Email:</label></td>
+                    <td class="field"><input ng-model="Benefactor.email" type="email" placeholder="Email address" name="email" required></td>
+                </tr>
+                <tr>
+                    <td class="label"><label for="telephoneNumber">Phone Number:</label></td>
+                    <td class="field"><input ng-model="Benefactor.phone" type="text" placeholder="Telephone number" name="phone" required></td>
+                </tr>
+            </table>
+            <div class="buttons">
+                <button type="reset" id="resetButton" class="ng-binding">Reset</button>
+                <button type="submit" id="registerButton" class="ng-binding" ng-click="requestBenefactor()">Register</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+

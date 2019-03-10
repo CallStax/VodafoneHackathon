@@ -1,0 +1,22 @@
+<h2>{{TextData.title[language]}}</h2>
+<hr />
+<p class="lead">{{TextData.heading[language]}}</p>
+
+<form id="userRequestsForm">
+    <table class="item-list">
+        <tr ng-repeat="industry in Industries track by $index">
+		<!-- <td>{{industry}}</td> --> 
+			<td class="label">{{industry[1]}}</td>
+			<td class="input"><input type="checkbox" ng-model="ChosenIndustries[$index]" ng-true-value="'{{industry.Id}}'" /></td>
+		</tr>
+    </table>
+	
+	<hr/>
+	
+    <!-- <textarea rows="4" cols="50" placeholder="{{TextData.text_placeholder[language]}}"></textarea> -->
+
+    <br />
+
+    <!-- <button type="reset" id="resetButton">{{TextData.reset[language]}}</button> -->
+    <button type="submit" id="submitButton" ng-click="UpdatePreferences()">{{TextData.submit[language]}}</button>
+</form>

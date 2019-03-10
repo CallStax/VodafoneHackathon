@@ -1,0 +1,34 @@
+﻿<h2>Home</h2>
+<hr/>
+<p class="lead">{{TextData.lead_top[language]}}</p>
+<div class="buttons">
+	<span ng-show="userType == 0">
+		<p class="emphasise">{{TextData.buttons_emphasis[language]}}</p>
+		<button class="big" ng-click="RequestBeneficiary()">{{TextData.button_big[language]}}</button>
+	</span>
+	<span ng-show="userType == 1">
+		<p class="emphasise">NGO Account</p>
+	</span>
+	<span ng-show="userType == 2">
+		<p class="emphasise">Thank you for helping</p>
+	</span>
+	<span ng-show="userType == 3">
+		<p class="emphasise">Your application is being reviewed</p>
+		<button class="big" ng-click="RedirectToUpdateIndustry()">{{TextData.button_big_change_industry[language]}}</button>
+	</span>
+	<span ng-show="userType == 4">
+		<p class="emphasise">Welcome back!</p>
+		<p>You are onboarded as an approved beneficiary.</p>
+		<button class="big" ng-click="RedirectToUpdateIndustry()">{{TextData.button_big_change_industry[language]}}</button>
+	</span>
+    <p>{{TextData.buttons_p1[language]}}</p>
+    <p>{{TextData.buttons_p2_beforeB[language]}} <b>{{TextData.buttons_p2_inB[language]}}</b> {{TextData.buttons_p2_afterB[language]}}</p>
+    <p><b>{{TextData.buttons_p3inB[language]}}</b> {{TextData.buttons_p3AfterB[language]}} <b>{{TextData.buttons_p3inB2[language]}} </b>{{TextData.buttons_p3AfterB2[language]}}</p>
+</div>
+<div class="corporate-logo">
+	<img src="./assets/vodafone-foundation.png"/>
+</div>
+<div class="links" ng-show="userType != 3 && userType != 4">
+	<p>{{TextData.links_bottom[language]}}</p>
+    <a href="#NGOs">NGOs</a> | <a href="#Benefactors/Signup">Benefactors</a>
+</div>
