@@ -3,12 +3,11 @@
 
     angular.module('Home').controller('HomeController', HomeController);
 
-    HomeController.$inject = ['$scope', 'SelectedLanguage'];
+    HomeController.$inject = ['$scope', '$window', '$rootScope'];
 
-    function HomeController($scope, SelectedLanguage){
+    function HomeController($scope, $window, $rootScope){
         $scope.Home = '';
-
-        $scope.SelectedLanguage = SelectedLanguage;
+		
         $scope.TextData = 
             {
                 lead_top: {
@@ -61,11 +60,6 @@
                 }
 
             };
-
-        $scope.ChangeLanguage = function () {
-            SelectedLanguage = 'mt';
-            console.log(SelectedLanguage);
-        }
     }
 
 }());

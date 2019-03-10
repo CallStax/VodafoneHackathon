@@ -1,15 +1,14 @@
 require('./scripts/main');
 import 'bootstrap';
 import './scss/custom.scss';
+require ('./MainController');
+
 const Web3 = require('web3');
 
 const contractAddress = require('./assets/contract.json');
 const abi = require('./assets/abi.json');
 
 angular.element(document).ready(() => {
-	
-	console.log('dafadfd');
-	
 	  // Checking if Web3 has been injected by the browser (Mist/MetaMask)
 	  if (typeof web3 !== 'undefined') {
 		console.log('found mist/metamask provider');

@@ -14,9 +14,9 @@ require('./NGOs/NGOs.Module.js');
     'use strict';
 
     angular.module('app', ['ngRoute', 'chart.js', 'Home', 'Benefactors', 'Beneficiary', 'NGOs'])
-        .config(function ($routeProvider, $locationProvider) {
+        .config(function ($routeProvider, $locationProvider, $rootScope) {
             $locationProvider.hashPrefix('');
-
+			
             $routeProvider
 
                 // route for the home page
