@@ -14,7 +14,7 @@ require('./NGOs/NGOs.Module.js');
     'use strict';
 
     angular.module('app', ['ngRoute', 'chart.js', 'Home', 'Benefactors', 'Beneficiary', 'NGOs'])
-        .config(function ($routeProvider, $locationProvider, $rootScope) {
+        .config(function ($routeProvider, $locationProvider) {
             $locationProvider.hashPrefix('');
 			
             $routeProvider
@@ -64,7 +64,7 @@ require('./NGOs/NGOs.Module.js');
                     templateUrl: 'NGOs/NGOs.ListofBeneficiaryRequests.html',
                     controller: 'ListOnboardingRequestsController'
                 });
-        }).value('SelectedLanguage', 'en');
+        });
 }());
 
 
