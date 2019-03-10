@@ -3,9 +3,9 @@
 
     angular.module('Beneficiary').controller('RequestController', RequestController);
 
-    RequestController.$inject = ['$scope', 'IndustryService', 'BeneficiaryService'];
+    RequestController.$inject = ['$scope', 'IndustryService', 'BeneficiaryService', '$location'];
 
-    function RequestController($scope, IndustryService, BeneficiaryService) {
+    function RequestController($scope, IndustryService, BeneficiaryService, $location) {
        
         $scope.ChosenIndustries = [];
 
@@ -13,6 +13,7 @@
             BeneficiaryService.registerBeneficiary($scope.ChosenIndustries).then(function(result){
                 alert('Registration successful! You will soon be contacted by a member of an NGO.');                
             });
+            $location.path('/');
         };
 		
         $scope.TextData = 

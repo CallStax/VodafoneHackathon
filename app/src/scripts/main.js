@@ -35,6 +35,10 @@ require('./NGOs/NGOs.Module.js');
                     templateUrl: 'Beneficiary/Beneficiary.SelfImprovement.html',
                     controller: 'SelfImprovementController'
                 })
+                .when('/Benefactors', {
+                    templateUrl: 'Benefactors/Benefactors.Signup.html',
+                    controller: 'SignupController'
+                })
                 .when('/Benefactors/Signup', {
                     templateUrl: 'Benefactors/Benefactors.Signup.html',
                     controller: 'SignupController'

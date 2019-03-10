@@ -3,11 +3,11 @@
 
     angular.module('NGOs').controller('NGOsHomeController', NGOsHomeController);
 
-    NGOsHomeController.$inject = ['$scope', 'NGOsService'];
+    NGOsHomeController.$inject = ['$scope', 'NGOsService', '$location'];
 
-    function NGOsHomeController($scope, NGOsService) {
+    function NGOsHomeController($scope, NGOsService, $location) {
 		console.log(NGOsService);
-
+        $scope.NGO = {};
         // $scope.TextData = 
             // {
                 // par_1: {
@@ -21,10 +21,10 @@
 			// };
 
         $scope.registerNgo = function () {
-            console.log($scope.Benefactor.name);
-			//TODO: Register NGO
-            //NGOsService.sendBenefactorData($scope.Benefactor.name, $scope.Benefactor.email, $scope.Benefactor.phone, $scope.Benefactor.mobile, $scope.Benefactor.service);
+            NGOsService.requestNGO($scope.NGO.name, $scope.NGO.volnum, $scope.NGO.services);
+            $location.path('/NGOs/ListOnboardingRequests');
         }
+
 		
 		NGOsService.getNGOs().then(function(response){
 			$scope.$apply(function() {

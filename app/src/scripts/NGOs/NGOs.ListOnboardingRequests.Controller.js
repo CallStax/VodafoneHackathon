@@ -3,10 +3,14 @@
 
     angular.module('NGOs').controller('ListOnboardingRequestsController', ListOnboardingRequestsController);
 
-    ListOnboardingRequestsController.$inject = ['$scope', 'NGOsService'];
+    ListOnboardingRequestsController.$inject = ['$scope', 'NGOsService', '$location'];
 
-    function ListOnboardingRequestsController($scope, NGOsService) {
-        
+    function ListOnboardingRequestsController($scope, NGOsService, $location) {
+
+        $scope.changeLocation = function (location) {
+            $location.path(location);
+        }
+
         NGOsService.getNGOApprovalsForBeneficiaries().then(function (response) {
             $scope.$apply(function () {
                 $scope.BenefeciaryRequests = response;

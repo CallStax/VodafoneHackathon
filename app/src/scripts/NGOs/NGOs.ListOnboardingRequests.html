@@ -1,8 +1,12 @@
-<h2>Onboarding Requests</h2>
+<h2>NGOs</h2>
 <hr />
 
-<div class="links">
-    <a href="#/NGOs/ListofBeneficiaryRequests">Beneficiery</a> 
-    <br/> <br />
-    <a href="#/NGOs/ListofBenefactorRequests">Benefactors</a>
+<div class="row">
+    <div class="column text-center w-100">
+        <button class="m-3" ng-click="changeLocation('/NGOs/ListofBeneficiaryRequests')"> Onboarding requests for beneficieries </button>
+        <button class="m-3" ng-click="changeLocation('/NGOs/ListofBenefactorRequests')"> Onboarding requests for benefactors </button>
+        <button class="m-3" ng-click="changeLocation('/NGOs/Leaderboard')"> Benefactors scoreboards </button>
+    </div>
 </div>
+
+
