@@ -56,7 +56,7 @@ In the same command line run the following command:
 node deploy.js
 ```
 
-This will essentially deploy the smart contract the the blockchain and create the smart contract address. Stopre this address in a neww file named 'contract.json' and place this file in the same location as the 'abi.json'.
+This will essentially deploy the smart contract the the blockchain and create the smart contract address. Store this address in a new file named 'contract.json' and place this file in the same location as the 'abi.json'.
 
 Open another command line, navigate to the app/src folder in the repository and run the following command:
 ```
