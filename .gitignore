@@ -39,3 +39,4 @@ bld/
 *.VisualState.xml
 TestResult.xml
 /SmartContracts/node_modules
+app/src/assets/contract.json

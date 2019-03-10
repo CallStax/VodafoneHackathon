@@ -4,8 +4,10 @@ contract Ghajnuna{
     
     //Structs
     struct NGO {
+        address ngoAddress;
         string name;
         string voNumber;
+        bytes32[] industries;
         bool isSet;
         bool isApproved;
         bool isSysAdmin;
@@ -19,19 +21,28 @@ contract Ghajnuna{
     }
 
     struct Beneficiary {
+        address beneficieryAddres;
         bytes32[] industries;
+        string[] furtherInformation;
         bool isSet;
-        bool isApproved; //TODO: Replaced by Approved By
+        bool isApproved;
         address[] approvedBy;
     }
     
     struct Benefactor {
+        address benefactorAddress;
         string name;
         bytes32[] industries;
         bool isSet;
+        bool isApproved;
+        address[] approvedBy;
     }
-    
-    //TODO: Create approval process
+
+    struct Course {
+        bytes32 id;
+        string name;
+        string description;
+    }
     
     //NGOs
     address[] private allNgos;
@@ -48,6 +59,11 @@ contract Ghajnuna{
     //Benefactors
     address[] private allBenefactors;
     mapping(address => Benefactor) private benefactors;
+
+    // Courses
+    bytes32[] private allCourses;
+    mapping(bytes32 => Course) private courses;
+    mapping(address => bytes32[]) private coursesTakenByUser;
     
     //Approved beneficiaries
     //mapping(address(NGO) => address[](beneficiaries))
@@ -55,8 +71,25 @@ contract Ghajnuna{
     //mapping(address(Beneficiary) => address[](NGOs))
     mapping(address => address[]) private ngoApprovalForBeneficiary; //List of NGOs that have onboarded the Beneficiary
 
-    //TODO Events
-    
+    //Approved benefactors
+    //mapping(address(NGO) => address[](benefactors))
+    mapping(address => address[]) private benefactorsApprovedByNgo; //List of NGOs that have onboarded the Benefactors
+    //mapping(address(Benefactors) => address[](NGOs))
+    mapping(address => address[]) private ngoApprovalForBenefactors; //List of NGOs that have onboarded the benefactors
+
+    //Events
+    event ngoRequested(address ngoAddress, string ngoName, string voNumber, bool isSet, bool isApproved, bool isSysAdmin);
+    event ngoApproved(address ngoAddress);
+    event ngoMadeAdmin(address ngoAddress);
+    event industryRegistered(bytes32 industryId, string code, string description, bool isSet);
+    event beneficieryRegistered(address beneficieryAddress, bytes32[] chosenIndustries, bool isSet, bool isApproved);
+    event beneficieryApproved(address beneficieryAddress);
+    event benefactorRegistered(address benefactorAddress, string company, bytes32[] chosenIndustries, bool isSet, bool isApproved);
+    event benefactorApproved(address benefactorAddress);
+    event courseCreated(bytes32 id, string name, string description);
+    event userEnrolledToCourse(address userAddress, bytes32 courseId);
+
+    //Constructor
     constructor(string memory ngoName, string memory voNumber) public {
         //Set contract creator as an Administrative NGO    
         ngos[msg.sender].name = ngoName;
@@ -68,30 +101,51 @@ contract Ghajnuna{
         allNgos.push(msg.sender);
     }
     
-    // Functions
+    //Functions for NGOs
     function requestNGO(address ngoAddress, string memory ngoName, string memory voNumber) public requireAdministrativeNGO {
+        ngos[ngoAddress].ngoAddress = ngoAddress;
         ngos[ngoAddress].name = ngoName;
         ngos[ngoAddress].voNumber = voNumber;
         ngos[ngoAddress].isSet = true;
         ngos[ngoAddress].isApproved = false;
         ngos[ngoAddress].isSysAdmin = false;
+
+        emit ngoRequested(ngoAddress, ngoName, voNumber, true, false, false);
+    }
+
+    function requestNGOChosenIndustry(bytes32[] memory chosenIndustry) public  {
+
     }
 
     function approveNGO(address ngoAddress) public requireAdministrativeNGO {
         ngos[ngoAddress].isApproved = true;
         allNgos.push(ngoAddress);
+
+        emit ngoApproved(ngoAddress);
     }
     
     function makeNGOAdmin(address ngoAddress) public requireAdministrativeNGO {
         ngos[ngoAddress].isSysAdmin = true;
+
+        emit ngoMadeAdmin(ngoAddress);
     }
 	
-	function getNGO(address ngoAddress) view public returns(string memory, string memory, bool, bool, bool) {
-		return (ngos[ngoAddress].name, ngos[ngoAddress].voNumber, ngos[ngoAddress].isSet, ngos[ngoAddress].isApproved, ngos[ngoAddress].isSysAdmin);
+	function getNGO(address ngoAddress) view public returns(address, string memory, string memory, bool, bool, bool) {
+		return (
+            ngos[ngoAddress].ngoAddress,
+            ngos[ngoAddress].name,
+            ngos[ngoAddress].voNumber,
+            ngos[ngoAddress].isSet,
+            ngos[ngoAddress].isApproved,
+            ngos[ngoAddress].isSysAdmin);
 	}
 
+    function getNGOs() view public returns(address[] memory){
+	    return allNgos;
+	}
 
-    function registerIndustry(string memory code, string memory description) public requireAdministrativeNGO {
+    //Functions for industries
+    function registerIndustry(string memory code, string memory description) public requireNGOOrBenefactor {
         bytes32 id = keccak256(abi.encodePacked(msg.sender, code, description));
 
         industries[id].id = id;
@@ -100,31 +154,43 @@ contract Ghajnuna{
         industries[id].isSet = true;
         
         allIndustries.push(id);
+
+        emit industryRegistered(id, code, description, true);
     }
 
     function getIndustry(bytes32 industryId) view public returns(bytes32, string memory, string memory, bool) {
         return (industries[industryId].id, industries[industryId].code, industries[industryId].description, industries[industryId].isSet);
     }
 
-    function getAllIndustries() view public returns(bytes32[] memory) {
+    function getIndustries() view public returns(bytes32[] memory) {
         return allIndustries;
     }
 
+    //Functions for beneficeries
     function registerBeneficiary(address beneficieryAddress, bytes32[] memory chosenIndustries) public {
+        beneficiaries[beneficieryAddress].beneficieryAddres = beneficieryAddress;
         beneficiaries[beneficieryAddress].industries = chosenIndustries;
         beneficiaries[beneficieryAddress].isSet = true;
         beneficiaries[beneficieryAddress].isApproved = false;
+
+        emit beneficieryRegistered(beneficieryAddress, chosenIndustries, true, false);
     }
 
-    function approveBeneficiary(address beneficiaryAddress) public requireAdministrativeNGO {
+    function approveBeneficiary(address beneficiaryAddress) public requireNGO {
         beneficiaries[beneficiaryAddress].isApproved = true;
         allBeneficiaries.push(beneficiaryAddress);
         beneficiariesApprovedByNgo[msg.sender].push(beneficiaryAddress);
         ngoApprovalForBeneficiary[beneficiaryAddress].push(msg.sender);
+
+        emit beneficieryApproved(beneficiaryAddress);
     }
 
-    function getBeneficiary(address beneficiaryAddress) view public returns(bytes32[] memory, bool, bool) {
-        return (beneficiaries[beneficiaryAddress].industries, beneficiaries[beneficiaryAddress].isSet, beneficiaries[beneficiaryAddress].isApproved);
+    function getBeneficiary(address beneficiaryAddress) view public returns(address, bytes32[] memory, bool, bool, address[] memory) {
+        return (beneficiaries[beneficiaryAddress].beneficieryAddres, beneficiaries[beneficiaryAddress].industries, beneficiaries[beneficiaryAddress].isSet, beneficiaries[beneficiaryAddress].isApproved, beneficiaries[beneficiaryAddress].approvedBy);
+    }
+
+    function getBeneficieries() view public returns(address[] memory){
+        return allBeneficiaries;
     }
 
     function getBeneficiariesApprovedByNGO(address ngo) view public returns(address[] memory) {
@@ -135,33 +201,42 @@ contract Ghajnuna{
         return ngoApprovalForBeneficiary[beneficiary];
     }
 
+    //Functions for benefactors
     function registerBenefactor(address benefactorAddress, string memory name, bytes32[] memory chosenIndustries) public {
+        benefactors[benefactorAddress].benefactorAddress = benefactorAddress;
         benefactors[benefactorAddress].name = name;
         benefactors[benefactorAddress].industries = chosenIndustries;
         benefactors[benefactorAddress].isSet = true;
-        
-        allBenefactors.push(benefactorAddress);
+        benefactors[benefactorAddress].isApproved = false;
+
+        emit benefactorRegistered(benefactorAddress, name, chosenIndustries, true, false);
     }
 
-    function getBenefactor(address benefactorAddress) view public returns(string memory, bytes32[] memory, bool) {
-        return (benefactors[benefactorAddress].name, benefactors[benefactorAddress].industries, benefactors[benefactorAddress].isSet);
+    function approveBenefactor(address benefactorAddress) public requireNGO {
+        benefactors[benefactorAddress].isApproved = true;
+        allBenefactors.push(benefactorAddress);
+        benefactorsApprovedByNgo[msg.sender].push(benefactorAddress);
+        ngoApprovalForBenefactors[benefactorAddress].push(msg.sender);
+
+        emit benefactorApproved(benefactorAddress);
+    }
+
+    function getBenefactor(address benefactorAddress) view public returns(address, string memory, bytes32[] memory, bool, bool, address[] memory){
+        return (benefactors[benefactorAddress].benefactorAddress, benefactors[benefactorAddress].name, benefactors[benefactorAddress].industries, benefactors[benefactorAddress].isSet, benefactors[benefactorAddress].isApproved, benefactors[benefactorAddress].approvedBy);
+    }
+
+    function getBenefactors() view public returns(address[] memory){
+        return allBenefactors;
     }
     
-
-	
-	function getNGOs() view public returns(address[] memory){
-	    return allNgos;
-	}
-	    
-
     //Modifiers
     modifier requireNGO(){
-        require((ngos[msg.sender].isSet), "Only NGOs are able To run this function");
+        require((ngos[msg.sender].isSet && ngos[msg.sender].isApproved), "Only NGOs are able to run this function");
         _;
     }
     
     modifier requireAdministrativeNGO(){
-        require((ngos[msg.sender].isSet && ngos[msg.sender].isSysAdmin), "Only Admin NGOs are able To run this function");
+        require((ngos[msg.sender].isSet && ngos[msg.sender].isApproved && ngos[msg.sender].isSysAdmin), "Only Admin NGOs are able to run this function");
         _;
     }
     
@@ -169,9 +244,14 @@ contract Ghajnuna{
         require((benefactors[msg.sender].isSet), "Only Benefactors are able To run this function");
         _;
     }
+
+    modifier requireNGOOrBenefactor(){
+        require(((ngos[msg.sender].isSet && ngos[msg.sender].isApproved) || (benefactors[msg.sender].isSet)), "Only NGOs or Benefactors are able to run this function");
+        _;
+    }
     
     modifier requireBeneficiary(){
-        require((benefactors[msg.sender].isSet), "Only Beneficiaries are able To run this function");
+        require((beneficiaries[msg.sender].isSet && beneficiaries[msg.sender].isApproved), "Only Beneficiaries are able to run this function");
         _;
     }
 }

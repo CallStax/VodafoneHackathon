@@ -30,8 +30,8 @@
             var result = await window.getInstance();
             return result.ghajnunaContract.methods.getNGOApprovalsForBeneficiaries().call();
         }
-
-
+		 
+		}
     }
 
 }());

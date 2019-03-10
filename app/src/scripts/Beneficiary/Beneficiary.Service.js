@@ -7,13 +7,13 @@
 
     function BeneficiaryService(){
         return {
-            getData: getData
+            registerBeneficiary: registerBeneficiary
         }
 
-        function getData(){
-            // web3 code goes here
-            console.log('TEST!')
-        }
+        async function registerBeneficiary(beneficiaryAddress, chosenIndustries) {
+            var result = await window.getInstance();
+			await result.ghajnunaContract.methods.registerBeneficiary(beneficiaryAddress, chosenIndustries).send({ from: window.contractAddress.address });		 
+		}
     }
 
 }());
