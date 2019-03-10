@@ -3,9 +3,9 @@
 
     angular.module('Home').controller('HomeController', HomeController);
 
-    HomeController.$inject = ['$scope', '$window', '$rootScope'];
+    HomeController.$inject = ['$scope', '$window', '$rootScope', '$location'];
 
-    function HomeController($scope, $window, $rootScope){
+    function HomeController($scope, $window, $rootScope, $location){
         $scope.Home = '';
 		
         $scope.TextData = 
@@ -60,6 +60,11 @@
                 }
 
             };
+
+        $scope.UpdateLocation = function () {
+            console.log("Hello");
+            $location.path('/Beneficiary/Request');
+        }
     }
 
 }());

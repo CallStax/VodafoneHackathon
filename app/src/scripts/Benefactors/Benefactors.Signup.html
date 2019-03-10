@@ -2,29 +2,37 @@
 <hr />
 <p class="lead">Please fill in this form to create an account as a benefactor</p>
 
-
 <form ng-submit="sendBenefactorData()">
     <div class="container-fluid main-panel">
         <div class="container">
-            <!--<label for="name">Name:</label> <input ng-model="Benefactor.name" type="text" placeholder="Name" name="name" required> <br />
-            <label for="surname">Surname:</label> <input ng-model="Benefactor.surname" type="text" placeholder="Surname" name="surname" required> <br />-->
-            <label for="companyName">Company Name:</label> <input ng-model="Benefactor.company" type="text" placeholder="Company Name" name="companyName" required> <br />
-            <label for="email">Email:</label> <input ng-model="Benefactor.email" type="text" placeholder="Email" name="email" required> <br />
-            <label for="number">Telephone Number:</label> <input ng-model="Benefactor.phone" type="tel" placeholder="Telephone number" name="number" required> <br />
-            <label for="number">Mobile Number:</label> <input ng-model="Benefactor.mobile" type="tel" placeholder="Mobile number" name="number" required> <br />
-
-            <div>
-                <p>
-                    Select service offered:
-                    <select ng-model="Benefactor.service" name="select" value="services">
-                        <option>a</option>
-                        <option>b</option>
-                        <option>c</option>
-                    </select>
-                </p>
+            <table class="form">
+                <tr>
+                    <td class="label"><label for="companyName">Company Name:</label></td>
+                    <td class="field"><input ng-model="Benefactor.name" type="text" placeholder="Company Name" name="companyName" required></td>
+                </tr>
+                <tr>
+                    <td class="label"><label for="email">Email:</label></td>
+                    <td class="field"><input ng-model="Benefactor.email" type="email" placeholder="Email address" name="email" required></td>
+                </tr>
+                <tr>
+                    <td class="label"><label for="telephoneNumber">Telephone Number:</label></td>
+                    <td class="field"><input ng-model="Benefactor.phone" type="text" placeholder="Telephone number" name="phone" required></td>
+                </tr>
+                <tr>
+                    <td class="label"><label for="mobileNumber">Mobile Number:</label></td>
+                    <td class="field"><input ng-model="Benefactor.mobile" type="text" placeholder="Mobile number" name="phone" required></td>
+                </tr>
+                <tr>
+                    <td class="label"><label for="services">Services Offered:</label></td>
+                    <td class="field"><input ng-model="Benefactor.services" type="tel" placeholder="Services Offered" name="services" required></td>
+                </tr>
+            </table>
+            <div class="buttons">
+                <button type="reset" id="resetButton" class="ng-binding">Reset</button>
+                <button type="submit" id="registerButton" class="ng-binding">Register</button>
             </div>
-            <button type="submit">Submit</button> <button type="reset"> Cancel </button>
         </div>
     </div>
 </form>
+
 

@@ -3,9 +3,9 @@
 
     angular.module('Beneficiary').controller('RequestController', RequestController);
 
-    RequestController.$inject = ['$scope', 'IndustryService', 'BeneficiaryService'];
+    RequestController.$inject = ['$scope', 'IndustryService', 'BeneficiaryService', '$location'];
 
-    function RequestController($scope, IndustryService, BeneficiaryService) {
+    function RequestController($scope, IndustryService, BeneficiaryService, $location) {
        
         $scope.ChosenIndustries = {
             selected: {}
@@ -20,6 +20,7 @@
                     alert('An error occurred! Please contact system administrator if issue persists');
                 }
             });
+            $location.path('/');
         };
 		
         $scope.TextData = 

@@ -4,13 +4,14 @@
     angular.module('Benefactors').controller('SignupController', SignupController);
 
 
-    SignupController.$inject = ['$scope', 'BenefactorService']
+    SignupController.$inject = ['$scope', 'BenefactorService', '$location']
 
-    function SignupController($scope, BenefactorService) {
+    function SignupController($scope, BenefactorService, $location) {
         $scope.Benefactor = {};
 
-        $scope.sendBenefactorData = function () {
-            BenefactorService.sendBenefactorData($scope.Benefactor.companyName, $scope.Benefactor.email, $scope.Benefactor.phone, $scope.Benefactor.mobile, $scope.Benefactor.service);
+        $scope.registerBenefactor = function () {
+            BenefactorService.registerBenefactor($scope.Benefactor.companyName, $scope.Benefactor.email, $scope.Benefactor.phone, $scope.Benefactor.mobile, $scope.Benefactor.service);
+            $location.path('/Benefactors/Listofrequests');
         }
 
         $scope.TextData = {

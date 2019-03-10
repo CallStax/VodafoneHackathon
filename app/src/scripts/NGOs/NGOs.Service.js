@@ -5,31 +5,42 @@
 
     NGOsService.$inject = [];
 
-    function NGOsService(){
-		
+    function NGOsService() {
 
-		
-        return {           
+
+
+        return {
             getNGOs: getNGOs,
-            getNGOApprovalsForBeneficiaries: getNGOApprovalsForBeneficiaries
-
+            getNGOApprovalsForBeneficiaries: getNGOApprovalsForBeneficiaries,
+            requestNGO: requestNGO
         }
-		
 
-        function getData(){
+
+        function getData() {
             // web3 code goes here
             console.log('TEST!')
         }
-		
-		async function getNGOs() {
-			var result = await window.getInstance();
-			return result.ghajnunaContract.methods.getNGOs().call();			 
+
+        async function getNGOs() {
+            var result = await window.getInstance();
+            return result.ghajnunaContract.methods.getNGOs().call();
         }
 
         async function getNGOApprovalsForBeneficiaries() {
             var result = await window.getInstance();
             return result.ghajnunaContract.methods.getNGOApprovalsForBeneficiaries().call();
         }
-    }
+
+        //async function postNGOApplication() {
+        //    var result = await window.getInstance();
+        //    return result.ghajnunaContract.methods.requestNGO({}).send({ from: window.contractAddress.address });
+        //}
+
+        async function requestNGO(name, volnum, chosenIndustries) {
+            var requests = await window.getInstance();
+            requests.ghajnunaContract.methods.requestNGO( name, volnum, chosenIndustries).send({ from: window.contractAddress.address });
+        }
+    };
+    
 
 }());
