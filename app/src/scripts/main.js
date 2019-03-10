@@ -44,6 +44,10 @@ require('./NGOs/NGOs.Module.js');
                     templateUrl: 'Benefactors/Benefactors.Listofrequests.html',
                     controller: 'ListofrequestsController'
                 })
+				.when('/NGOs', {
+                    templateUrl: 'NGOs/NGOs.Home.html',
+                    controller: 'NGOsHomeController'
+                })
                 .when('/NGOs/Leaderboard', {
                     templateUrl: 'NGOs/NGOs.Leaderboard.html',
                     controller: 'NGOsLeaderboardController'

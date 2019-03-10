@@ -50,7 +50,7 @@ describe('Ghajnuna - NGO Admin', () => {
 	const ngo = await ghajnuna.methods.getNGO(accounts[1]).call();
 	assert.equal(ngo[0], 'Test NGO');
 	assert.equal(ngo[1], 'VO/9999');
-	assert.equal(ngo[2], true); //Is Set
+	assert.equal(ngo[2], true); //Is Set 
 	assert.equal(ngo[3], false); //is Sys Admin
   });
   

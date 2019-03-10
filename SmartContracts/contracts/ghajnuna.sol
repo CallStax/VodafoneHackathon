@@ -71,7 +71,11 @@ contract Ghajnuna{
 	function getNGO(address ngoAddress) view public returns(string memory, string memory, bool, bool) {
 		return (ngos[ngoAddress].name, ngos[ngoAddress].voNumber, ngos[ngoAddress].isSet, ngos[ngoAddress].isSysAdmin);
 	}
-    
+	
+	function getNGOs() view public returns(address[] memory){
+	    return allNgos;
+	}
+	    
     //Modifiers
     modifier requireNGO(){
         require((ngos[msg.sender].isSet), "Only NGOs are able To run this function");
