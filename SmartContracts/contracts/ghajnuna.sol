@@ -23,7 +23,6 @@ contract Ghajnuna{
     struct Beneficiary {
         address beneficieryAddres;
         bytes32[] industries;
-        string[] furtherInformation;
         bool isSet;
         bool isApproved;
         address[] approvedBy;
@@ -55,10 +54,13 @@ contract Ghajnuna{
     //Beneficiaries
     address[] private allBeneficiaries;
     mapping(address => Beneficiary) private beneficiaries;
-    
+    address[] private beneficiariesPendingApproval;
+
     //Benefactors
     address[] private allBenefactors;
     mapping(address => Benefactor) private benefactors;
+    address[] private benefactorsPendingApproval;
+    
 
     // Courses
     bytes32[] private allCourses;
@@ -78,13 +80,15 @@ contract Ghajnuna{
     mapping(address => address[]) private ngoApprovalForBenefactors; //List of NGOs that have onboarded the benefactors
 
     //Events
-    event ngoRequested(address ngoAddress, string ngoName, string voNumber, bool isSet, bool isApproved, bool isSysAdmin);
+    event ngoRegistered(address ngoAddress, string ngoName, string voNumber, bool isSet, bool isApproved, bool isSysAdmin);
+    event ngoIndustriesRecevied(address ngoAddress, bytes32[] industries);
     event ngoApproved(address ngoAddress);
     event ngoMadeAdmin(address ngoAddress);
     event industryRegistered(bytes32 industryId, string code, string description, bool isSet);
-    event beneficieryRegistered(address beneficieryAddress, bytes32[] chosenIndustries, bool isSet, bool isApproved);
+    event beneficieryRegistered(address beneficieryAddress, bool isSet, bool isApproved);
     event beneficieryApproved(address beneficieryAddress);
-    event benefactorRegistered(address benefactorAddress, string company, bytes32[] chosenIndustries, bool isSet, bool isApproved);
+    event benefactorRegistered(address benefactorAddress, string name, bool isSet, bool isApproved);
+    event benefactorIndustriesReceived(address benefactorAddress, bytes32[] industries);
     event benefactorApproved(address benefactorAddress);
     event courseCreated(bytes32 id, string name, string description);
     event userEnrolledToCourse(address userAddress, bytes32 courseId);
@@ -110,11 +114,15 @@ contract Ghajnuna{
         ngos[ngoAddress].isApproved = false;
         ngos[ngoAddress].isSysAdmin = false;
 
-        emit ngoRequested(ngoAddress, ngoName, voNumber, true, false, false);
+        emit ngoRegistered(ngoAddress, ngoName, voNumber, true, false, false);
     }
 
-    function requestNGOChosenIndustry(bytes32[] memory chosenIndustry) public  {
+    function requestNGOChosenIndustries(address ngoAddress, bytes32[] memory chosenIndustries) public {
+        require(ngos[ngoAddress].isSet);
 
+        ngos[ngoAddress].industries = chosenIndustries;
+
+        emit ngoIndustriesRecevied(ngoAddress, chosenIndustries);
     }
 
     function approveNGO(address ngoAddress) public requireAdministrativeNGO {
@@ -173,12 +181,14 @@ contract Ghajnuna{
         beneficiaries[beneficieryAddress].isSet = true;
         beneficiaries[beneficieryAddress].isApproved = false;
 
-        emit beneficieryRegistered(beneficieryAddress, chosenIndustries, true, false);
+        emit beneficieryRegistered(beneficieryAddress, true, false);
     }
 
     function approveBeneficiary(address beneficiaryAddress) public requireNGO {
         beneficiaries[beneficiaryAddress].isApproved = true;
         allBeneficiaries.push(beneficiaryAddress);
+
+        beneficiaries[beneficiaryAddress].approvedBy.push(msg.sender);
         beneficiariesApprovedByNgo[msg.sender].push(beneficiaryAddress);
         ngoApprovalForBeneficiary[beneficiaryAddress].push(msg.sender);
 
@@ -202,14 +212,21 @@ contract Ghajnuna{
     }
 
     //Functions for benefactors
-    function registerBenefactor(address benefactorAddress, string memory name, bytes32[] memory chosenIndustries) public {
+    function registerBenefactor(address benefactorAddress, string memory name) public {
         benefactors[benefactorAddress].benefactorAddress = benefactorAddress;
         benefactors[benefactorAddress].name = name;
-        benefactors[benefactorAddress].industries = chosenIndustries;
         benefactors[benefactorAddress].isSet = true;
         benefactors[benefactorAddress].isApproved = false;
 
-        emit benefactorRegistered(benefactorAddress, name, chosenIndustries, true, false);
+        emit benefactorRegistered(benefactorAddress, name, true, false);
+    }
+
+    function benefactorChosenIndustries(address benefactorAddress, bytes32[] memory chosenIndustries) public {
+        require(benefactors[benefactorAddress].isSet);
+
+        benefactors[benefactorAddress].industries = chosenIndustries;
+
+        emit benefactorIndustriesReceived(benefactorAddress, chosenIndustries);
     }
 
     function approveBenefactor(address benefactorAddress) public requireNGO {
