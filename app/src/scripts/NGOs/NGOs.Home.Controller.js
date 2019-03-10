@@ -13,13 +13,7 @@
 				$scope.NGOs = response;
 				console.log(response);
 			});
-		});
-			
-		
-		//const test = await window.ghajnunaContract.methods.allNGOs().call();
-
-		//console.log(test);
-  
+		}); 
         
     };
 

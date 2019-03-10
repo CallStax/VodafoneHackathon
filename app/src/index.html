@@ -12,12 +12,10 @@
 		<link href="https://fonts.googleapis.com/css?family=Comfortaa:300,400,700|Ubuntu:300,300i,400,400i,500,500i,700,700i" rel="stylesheet"> <!--TODO: Reduce/Cache-->
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
      </head>
-	<body>
+	<body ng-controller="MainController">
 	<nav class="heading">
         <h1 class="app-title" alt="Għajnu.na">Għajnu<span class="alternate-color">.na</span></h1>
-        
-        <button ng-click=""> Maltese </button>
-		<!-- <span class="menu"><i class="fas fa-bars"></i></span> -->
+		<span class="language"> <img ng-click="setLanguage('en')" src="assets/flag-en.png" /> <img ng-click="setLanguage('mt')" src="assets/flag-mt.png" /></span>
 	</nav>
 	<div class="container-fluid main-panel">
 		  <div class="container">

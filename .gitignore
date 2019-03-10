@@ -5,3 +5,4 @@
 /.vs/slnx.sqlite
 /.vs
 /SmartContracts/node_modules
+app/src/assets/contract.json

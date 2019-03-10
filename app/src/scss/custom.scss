@@ -195,3 +195,16 @@ div.main-panel{
 		width: 250px;
 	}
 }
+
+.language {
+	font-size: 10px;
+	position: absolute;
+	right: 15px;
+	
+	img {
+		width: 25px;
+		height: 15px;
+		margin-left: 5px;
+		cursor: pointer;
+	}
+}
