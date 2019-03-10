@@ -32,10 +32,6 @@
 
         function activate(){
            // $scope.GetAllCourses();
-
-            UserService.getUserType().then(function(result){
-                console.log(result);
-            });
         }
 
         activate();
