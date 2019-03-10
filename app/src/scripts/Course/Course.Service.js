@@ -8,7 +8,8 @@
     function CourseService(){
         return {
             getCourses: getCourses,
-            enrollInCourse: enrollInCourse
+            enrollInCourse: enrollInCourse,
+            setupSampleCourses: setupSampleCourses
         }
         
         async function getCourses() {
@@ -18,8 +19,13 @@
         
         async function enrollInCourse(beneficiaryAddress, course) {
             var result = await window.getInstance();
-			await result.ghajnunaContract.methods.enrollInCourse(beneficiaryAddress, course).send({ from: window.contractAddress.address });		 
-		}
+			await result.ghajnunaContract.methods.enrollInCourse(beneficiaryAddress, course).send({ from: result.accounts[0] });		 
+        }
+        
+        async function setupSampleCourses(){
+            var result = await window.getInstance();
+            await result.ghajnunaContract.methods.registerCourse('Maltese', 'Learn Fundamental Maltese').send({from: result.accounts[0]});
+        }
     }
 
 }());

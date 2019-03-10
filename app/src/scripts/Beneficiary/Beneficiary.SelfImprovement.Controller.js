@@ -20,7 +20,7 @@
         }
 
         $scope.EnrollInCourse = function(course){
-            CourseService.enrollInCourse(window.contractAddress.address, course).then(function(result){
+            CourseService.enrollInCourse(course).then(function(result){
                 if(result){
                     alert('Registration successful! You will soon be contacted by a member of an NGO.');
                 }

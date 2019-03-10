@@ -7,18 +7,11 @@
 
     function RequestController($scope, IndustryService, BeneficiaryService) {
        
-        $scope.ChosenIndustries = {
-            selected: {}
-        };
+        $scope.ChosenIndustries = [];
 
         $scope.SubmitForm = function () {
-            BeneficiaryService.registerBeneficiary(window.contractAddress.address, $scope.ChosenIndustries).then(function(result){
-                if(result){
-                    alert('Registration successful! You will soon be contacted by a member of an NGO.');
-                }
-                else {
-                    alert('An error occurred! Please contact system administrator if issue persists');
-                }
+            BeneficiaryService.registerBeneficiary($scope.ChosenIndustries).then(function(result){
+                alert('Registration successful! You will soon be contacted by a member of an NGO.');                
             });
         };
 		
@@ -46,9 +39,20 @@
                 }
             };
 
+        $scope.GetIndustry = function(industryId){
+            IndustryService.getIndustry(industryId).then(function(result){
+                $scope.$apply(function(){
+                    $scope.Industries.push(result);
+                });
+            });
+        }
+
         $scope.GetIndustries = function(){
             IndustryService.getIndustries().then(function(result){
-                $scope.Industries = result;
+                $scope.Industries = [];
+                angular.forEach(result, function(item){
+                    $scope.GetIndustry(item);
+                });
             });
         }
 

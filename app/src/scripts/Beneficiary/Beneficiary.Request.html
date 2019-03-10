@@ -4,9 +4,9 @@
 
 <form id="userRequestsForm">
     <table class="item-list">
-        <tr ng-repeat="industry in Industries">
-			<td class="label">{{industry}}</td>
-			<td class="input"><input type="checkbox" ng-model="ChosenIndustries.selected[$index]" ng-true-value="'{{industry}}'" ng-false-value="''" /></td>
+        <tr ng-repeat="industry in Industries track by $index">
+			<td class="label">{{industry[2]}}</td>
+			<td class="input"><input type="checkbox" ng-model="ChosenIndustries[$index]" ng-true-value="'{{industry[0]}}'" ng-false-value="''" /></td>
 		</tr>
     </table>
 
