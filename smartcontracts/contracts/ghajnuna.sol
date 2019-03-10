@@ -70,8 +70,6 @@ contract Ghajnuna{
     //Approved beneficiaries
     //mapping(address(NGO) => address[](beneficiaries))
     mapping(address => address[]) private beneficiariesApprovedByNgo; //List of NGOs that have onboarded the Beneficiary
-    //mapping(address(Beneficiary) => address[](NGOs))
-    mapping(address => address[]) private ngoApprovalForBeneficiary; //List of NGOs that have onboarded the Beneficiary
 
     //Approved benefactors
     //mapping(address(NGO) => address[](benefactors))
@@ -178,13 +176,13 @@ contract Ghajnuna{
     }
 
     //Functions for beneficeries
-    function requestBeneficiary(address beneficieryAddress, bytes32[] memory chosenIndustries) public {
-        beneficiaries[beneficieryAddress].beneficieryAddres = beneficieryAddress;
-        beneficiaries[beneficieryAddress].industries = chosenIndustries;
-        beneficiaries[beneficieryAddress].isSet = true;
-        beneficiaries[beneficieryAddress].isApproved = false;
+    function requestBeneficiary(bytes32[] memory chosenIndustries) public {
+        beneficiaries[msg.sender].beneficieryAddres = msg.sender;
+        beneficiaries[msg.sender].industries = chosenIndustries;
+        beneficiaries[msg.sender].isSet = true;
+        beneficiaries[msg.sender].isApproved = false;
 
-        emit beneficieryRegistered(beneficieryAddress, true, false);
+        emit beneficieryRegistered(msg.sender, true, false);
     }
 
     function approveBeneficiary(address beneficiaryAddress) public requireNGO {
@@ -193,7 +191,6 @@ contract Ghajnuna{
 
         beneficiaries[beneficiaryAddress].approvedBy.push(msg.sender);
         beneficiariesApprovedByNgo[msg.sender].push(beneficiaryAddress);
-        ngoApprovalForBeneficiary[beneficiaryAddress].push(msg.sender);
 
         emit beneficieryApproved(beneficiaryAddress);
     }
@@ -211,15 +208,15 @@ contract Ghajnuna{
     }
 
     function getNGOApprovalsForBeneficiaries(address beneficiary) view public returns(address[] memory) {
-        return ngoApprovalForBeneficiary[beneficiary];
+        return beneficiaries[beneficiaryAddress].approvedBy;
     }
 
     //Functions for benefactors
-    function registerBenefactor(address benefactorAddress, string memory name) public {
-        benefactors[benefactorAddress].benefactorAddress = benefactorAddress;
-        benefactors[benefactorAddress].name = name;
-        benefactors[benefactorAddress].isSet = true;
-        benefactors[benefactorAddress].isApproved = false;
+    function requestBenefactor(string memory name) public {
+        benefactors[msg.sender].benefactorAddress = msg.sender;
+        benefactors[msg.sender].name = name;
+        benefactors[msg.sender].isSet = true;
+        benefactors[msg.sender].isApproved = false;
 
         emit benefactorRegistered(benefactorAddress, name, true, false);
     }
@@ -235,6 +232,7 @@ contract Ghajnuna{
     function approveBenefactor(address benefactorAddress) public requireNGO {
         benefactors[benefactorAddress].isApproved = true;
         allBenefactors.push(benefactorAddress);
+		
         benefactorsApprovedByNgo[msg.sender].push(benefactorAddress);
         ngoApprovalForBenefactors[benefactorAddress].push(msg.sender);
 
