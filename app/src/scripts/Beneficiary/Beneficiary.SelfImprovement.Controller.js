@@ -3,9 +3,9 @@
 
     angular.module('Course').controller('SelfImprovementController', SelfImprovementController);
 
-    SelfImprovementController.$inject = ['$scope', 'CourseService'];
+    SelfImprovementController.$inject = ['$scope', 'CourseService', 'UserService'];
 
-    function SelfImprovementController($scope, CourseService) {
+    function SelfImprovementController($scope, CourseService, UserService) {
         $scope.AvailableCourses = [
             "Course 1",
             "Course 2",
@@ -20,7 +20,7 @@
         }
 
         $scope.EnrollInCourse = function(course){
-            CourseService.enrollInCourse(window.contractAddress.address, course).then(function(result){
+            CourseService.enrollInCourse(course).then(function(result){
                 if(result){
                     alert('Registration successful! You will soon be contacted by a member of an NGO.');
                 }
@@ -31,7 +31,7 @@
         }
 
         function activate(){
-            $scope.GetAllCourses();
+           // $scope.GetAllCourses();
         }
 
         activate();
