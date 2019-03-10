@@ -106,18 +106,18 @@ contract Ghajnuna{
     }
     
     //Functions for NGOs
-    function requestNGO(address ngoAddress, string memory ngoName, string memory voNumber) public requireAdministrativeNGO {
-        ngos[ngoAddress].ngoAddress = ngoAddress;
-        ngos[ngoAddress].name = ngoName;
-        ngos[ngoAddress].voNumber = voNumber;
-        ngos[ngoAddress].isSet = true;
-        ngos[ngoAddress].isApproved = false;
-        ngos[ngoAddress].isSysAdmin = false;
+    function requestNGO(string memory ngoName, string memory voNumber) public requireAdministrativeNGO {
+        ngos[msg.sender].ngoAddress = msg.sender;
+        ngos[msg.sender].name = ngoName;
+        ngos[msg.sender].voNumber = voNumber;
+        ngos[msg.sender].isSet = true;
+        ngos[msg.sender].isApproved = false;
+        ngos[msg.sender].isSysAdmin = false;
 
         emit ngoRegistered(ngoAddress, ngoName, voNumber, true, false, false);
     }
 
-    function requestNGOChosenIndustries(address ngoAddress, bytes32[] memory chosenIndustries) public {
+    function updateNGOIndustries(bytes32[] memory chosenIndustries) public {
         require(ngos[ngoAddress].isSet);
 
         ngos[ngoAddress].industries = chosenIndustries;
@@ -155,6 +155,8 @@ contract Ghajnuna{
     //Functions for industries
     function registerIndustry(string memory code, string memory description) public requireNGOOrBenefactor {
         bytes32 id = keccak256(abi.encodePacked(msg.sender, code, description));
+		
+		require(industries[id].isSet == false, 'Industry is already set');
 
         industries[id].id = id;
         industries[id].code = code;
