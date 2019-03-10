@@ -168,8 +168,9 @@ contract Ghajnuna{
         emit industryRegistered(id, code, description, true);
     }
 
-    function getIndustry(bytes32 industryId) view public returns(bytes32, string memory, string memory, bool) {
-        return (industries[industryId].id, industries[industryId].code, industries[industryId].description, industries[industryId].isSet);
+    function getIndustry(bytes32 industryId) view public returns(string memory, string memory) {
+		require(industries[industryId].isSet);
+        return (industries[industryId].code, industries[industryId].description);
     }
 
     function getIndustries() view public returns(bytes32[] memory) {
