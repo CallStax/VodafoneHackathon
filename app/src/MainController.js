@@ -13,13 +13,21 @@
         $rootScope.language = lang;				
       }
 
+	  window.onload = function(){
+        UserService.getUserType().then(function(result){
+          $scope.$apply(function() {$rootScope.userType = result;});
+		  console.log('User Changed!', $rootScope.userType);
+        });
+	  }
+	  
       window.ethereum.on('accountsChanged', function (accounts) {
         UserService.getUserType().then(function(result){
-          $rootScope.userType = result;
+          $scope.$apply(function() {$rootScope.userType = result;});
+		  console.log('User Changed!', $rootScope.userType);
         });
-        
-      })
-    };      
+      });  
+	  
+    };     
 
 
 }());

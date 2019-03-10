@@ -7,14 +7,17 @@
 
     function BenefactorService() {
         return {
-            registerBenefactor: registerBenefactor,
+            requestBenefactor: requestBenefactor,
             getRequests: getRequests,
-            getScore: getScore
+            getScore: getScore,
+			benefactorChosenIndustries: benefactorChosenIndustries,
+			getBenefactorIndustries: getBenefactorIndustries,
+			getBeneficiariesApprovedByNGO : getBeneficiariesApprovedByNGO
         }
 
-        async function registerBenefactor(companyName, email, phone, mobile, chosenIndustries) {
+        async function requestBenefactor(companyName, email, phone) {
             var requests = await window.getInstance();
-            requests.ghajnunaContract.methods.registerBenefactor({ companyName, email, phone, mobile, chosenIndustries }).send({ from: window.contractAddress.address });
+            return requests.ghajnunaContract.methods.requestBenefactor(companyName, email, phone).send({ from: requests.accounts[0] });
         }
 
         async function getRequests() {
@@ -26,6 +29,22 @@
             var requests = await window.getInstance();
             return requests.ghajnunaContract.methods.getScore().call();
         }
+		
+		
+		async function benefactorChosenIndustries(chosenIndustries) {
+            var result = await window.getInstance();
+			return result.ghajnunaContract.methods.benefactorChosenIndustries(chosenIndustries).send({ from: result.accounts[0]});			
+		}
+		
+		async function getBenefactorIndustries(){
+			var requests = await window.getInstance();
+            return requests.ghajnunaContract.methods.getBenefactorIndustries(requests.accounts[0]).call({ from: requests.accounts[0]});	
+		}
+		
+		async function getBeneficiariesApprovedByNGO (){		
+			var requests = await window.getInstance();
+            return requests.ghajnunaContract.methods.getBeneficiariesApprovedByNGO().call({ from: requests.accounts[0]});
+		}
     }
 
 }());

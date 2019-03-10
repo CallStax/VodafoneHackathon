@@ -3,17 +3,25 @@
 
     angular.module('Beneficiary').controller('RequestController', RequestController);
 
-    RequestController.$inject = ['$scope', 'IndustryService', 'BeneficiaryService', '$location'];
+    RequestController.$inject = ['$scope', 'IndustryService', 'BeneficiaryService', '$location', '$rootScope'];
 
-    function RequestController($scope, IndustryService, BeneficiaryService, $location) {
+    function RequestController($scope, IndustryService, BeneficiaryService, $location, $rootScope) {
        
         $scope.ChosenIndustries = [];
 
-        $scope.SubmitForm = function () {
-            BeneficiaryService.registerBeneficiary($scope.ChosenIndustries).then(function(result){
-                alert('Registration successful! You will soon be contacted by a member of an NGO.');                
+        $scope.UpdatePreferences = function () {
+			let industries = $scope.ChosenIndustries.filter(function(element){
+				return element !== false;
+			});
+						
+            BeneficiaryService.updateBeneficiaryIndustries(industries).then(function(result){
+                
+				alert('Registration successful! You will soon be contacted by a member of an NGO.');                
+				
+				$rootScope.userType = 4;
+				
+				$scope.$apply(function() {$location.path('/');});
             });
-            $location.path('/');
         };
 		
         $scope.TextData = 
@@ -43,6 +51,7 @@
         $scope.GetIndustry = function(industryId){
             IndustryService.getIndustry(industryId).then(function(result){
                 $scope.$apply(function(){
+					result.Id = industryId;
                     $scope.Industries.push(result);
                 });
             });
@@ -56,12 +65,23 @@
                 });
             });
         }
-
+		
+		
+		$scope.GetSelectedIndustries = function(){
+			BeneficiaryService.getBeneficiaryIndustries().then(function(result){
+				$scope.$apply(function(){
+					$scope.ChosenIndustries = result;
+				});
+			});
+		
+		}
+		
         function activate(){
             $scope.GetIndustries();
+			$scope.GetSelectedIndustries();
         }
 
         activate();
-    };
+    }
 
 }());

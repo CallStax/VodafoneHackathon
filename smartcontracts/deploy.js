@@ -11,7 +11,7 @@ const deploy = async () => {
   
   const result = await new web3.eth.Contract(abi)
     .deploy({ data: evm.bytecode.object, arguments: ['Vodafone Malta Foundation', 'VO/0537'] })
-    .send({ gas: '5000000', from: accounts[0] });
+    .send({ gas: '6000000', from: accounts[0] });
 
 	const contractAddress = result.options.address;
 	
@@ -22,9 +22,8 @@ const deploy = async () => {
 	//0 - Vodafone Malta Foundation
 	//1 - Millenium Chapel
 	//2 - Food Bank
-	//3 - Charitas
 	
-	await contractInstance.methods.registerIndustry('FOOD', 'Food and Catering').send({from: accounts[0], gasLimit: 3000000});
+	await contractInstance.methods.registerIndustry('FOOD', 'Food').send({from: accounts[0], gasLimit: 3000000});
 	await contractInstance.methods.registerIndustry('CLOTHES', 'Clothes').send({from: accounts[0], gasLimit: 3000000});
 	await contractInstance.methods.registerIndustry('APPL', 'Appliances').send({from: accounts[0], gasLimit: 3000000});
 	await contractInstance.methods.registerIndustry('HYGIENE', 'Hygiene').send({from: accounts[0], gasLimit: 3000000});
@@ -58,9 +57,22 @@ const deploy = async () => {
 	await contractInstance.methods.approveNGO(accounts[2]).send({from: accounts[0], gasLimit: 3000000});
 	await contractInstance.methods.updateNGOIndustries([industries['FOOD'].Id]).send({from: accounts[1], gasLimit: 3000000});
 	
-	await contractInstance.methods.requestNGO('Caritas', 'VO/0032').send({from: accounts[3], gasLimit: 3000000});
-	await contractInstance.methods.approveNGO(accounts[3]).send({from: accounts[0], gasLimit: 3000000});
-	await contractInstance.methods.updateNGOIndustries([industries['CLOTHES'].Id, industries['HYGIENE'].Id]).send({from: accounts[1], gasLimit: 3000000});
+	// await contractInstance.methods.requestNGO('Caritas', 'VO/0032').send({from: accounts[3], gasLimit: 3000000});
+	// await contractInstance.methods.approveNGO(accounts[3]).send({from: accounts[0], gasLimit: 3000000});
+	// await contractInstance.methods.updateNGOIndustries([industries['CLOTHES'].Id, industries['HYGIENE'].Id]).send({from: accounts[1], gasLimit: 3000000});
+	
+	
+	await contractInstance.methods.requestBeneficiary().send({from: accounts[3], gasLimit: 3000000});
+	await contractInstance.methods.approveBeneficiary(accounts[3]).send({from: accounts[0], gasLimit: 3000000});
+	await contractInstance.methods.updateBeneficiaryIndustries([industries['CLOTHES'].Id, industries['HYGIENE'].Id]).send({from: accounts[3], gasLimit: 3000000});	
+	
+	await contractInstance.methods.requestBeneficiary().send({from: accounts[4], gasLimit: 3000000});
+	await contractInstance.methods.approveBeneficiary(accounts[4]).send({from: accounts[1], gasLimit: 3000000});
+	await contractInstance.methods.updateBeneficiaryIndustries([industries['FOOD'].Id, industries['HYGIENE'].Id]).send({from: accounts[4], gasLimit: 3000000});
+
+	await contractInstance.methods.requestBenefactor('ACME Co. Ltd', 'test@abc.net', '99112233').send({from: accounts[6], gasLimit: 3000000});
+	await contractInstance.methods.approveBenefactor(accounts[6]).send({from: accounts[0], gasLimit: 3000000});
+	await contractInstance.methods.updateBenefactorIndustries([industries['FOOD'].Id, industries['APPL'].Id]).send({from: accounts[6], gasLimit: 3000000});		
 	
 	
 	const usertype0 = await contractInstance.methods.getUserType().call({from: accounts[0]});

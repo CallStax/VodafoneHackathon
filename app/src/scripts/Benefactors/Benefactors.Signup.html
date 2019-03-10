@@ -2,7 +2,7 @@
 <hr />
 <p class="lead">Please fill in this form to create an account as a benefactor</p>
 
-<form ng-submit="sendBenefactorData()">
+<form>
     <div class="container-fluid main-panel">
         <div class="container">
             <table class="form">
@@ -15,21 +15,13 @@
                     <td class="field"><input ng-model="Benefactor.email" type="email" placeholder="Email address" name="email" required></td>
                 </tr>
                 <tr>
-                    <td class="label"><label for="telephoneNumber">Telephone Number:</label></td>
+                    <td class="label"><label for="telephoneNumber">Phone Number:</label></td>
                     <td class="field"><input ng-model="Benefactor.phone" type="text" placeholder="Telephone number" name="phone" required></td>
-                </tr>
-                <tr>
-                    <td class="label"><label for="mobileNumber">Mobile Number:</label></td>
-                    <td class="field"><input ng-model="Benefactor.mobile" type="text" placeholder="Mobile number" name="phone" required></td>
-                </tr>
-                <tr>
-                    <td class="label"><label for="services">Services Offered:</label></td>
-                    <td class="field"><input ng-model="Benefactor.services" type="tel" placeholder="Services Offered" name="services" required></td>
                 </tr>
             </table>
             <div class="buttons">
                 <button type="reset" id="resetButton" class="ng-binding">Reset</button>
-                <button type="submit" id="registerButton" class="ng-binding">Register</button>
+                <button type="submit" id="registerButton" class="ng-binding" ng-click="requestBenefactor()">Register</button>
             </div>
         </div>
     </div>

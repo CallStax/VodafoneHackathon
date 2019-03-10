@@ -1,19 +1,45 @@
-<h2>List of Requests</h2>
-<hr />
-
 <div class="container">
-    <table>
-        <tr>
-            <th>Description</th>
-            <th>NGO</th>
-            <th>Contribute</th>
-        </tr>
-        <tr ng-repeat="item in requestList">
-            <td>{{item.Description}}</td>
-            <td>{{item.NGO}}</td>
-            <td>
-                <button ng-click="contribute(item)">Provide</button>
-            </td>
-        </tr>
-    </table>
+	<h2>List of Requests</h2>
+	<hr />
+
+	<div class="table-responsive">
+		<table class="table">
+			<tr>
+				<th>User Id</th>
+				<th>NGO</th>
+				<th>Industries</th>
+				<th>Contribute</th>
+			</tr>
+			<tr ng-repeat="item in RequestList">
+				<td>{{item[0].substring(0, 10)}}</td>
+				<td>{{item.NGO}}</td>
+				<td>{{item.Industries}}</td>
+				<td>
+					<button ng-click="contribute(item)">Provide</button>
+				</td>
+			</tr>
+		</table>
+	</div>
+	
+	<br>
+	
+	<h2>Industries</h2>
+	<hr/>
+	
+	<div class="table-responsive">
+		<table class="item-list table">
+			<tr ng-repeat="industry in Industries track by $index">
+				<td class="label">{{industry[1]}}</td>
+				<td class="input"><input type="checkbox" ng-model="ChosenIndustries[$index]" ng-true-value="'{{industry.Id}}'" /></td>
+			</tr>
+		</table>
+	</div>
+	
+	
+	<hr/>
+	
+
+    <br />
+
+	<button type="submit" id="submitButton" ng-click="UpdatePreferences()">Submit</button>
 </div>

@@ -2,18 +2,20 @@
 <hr />
 
 <div class="container">
-    <table>
-        <tr>
-            <th>Date</th>
-            <th>Service Needed</th>
-            <th>Accepeted</th>
-        </tr>
-        <tr ng-repeat="item in BenefeciaryRequests">
-            <td>{{item.Date}}</td>
-            <td>{{item.ServiceNeeded}}</td>
-            <td><input type="checkbox" ng-model="item.Accepted" />
-        </tr>
-    </table>
+	<div class="table-responsive">
+		<table class="table">
+			<tr>
+				<th>Identifier</th>
+				<th>Service Needed</th>
+				<th>Accept</th>
+			</tr>
+			<tr ng-repeat="item in BenefeciaryRequests">
+				<td>{{item.Id.substring(0,10)}}</td>
+				<td>{{item.ServiceNeeded}}</td>
+				<td><button ng-click="contribute(item)">Verify</button></td>
+			</tr>
+		</table>
+	</div>
 </div>
 
 <div class="links">

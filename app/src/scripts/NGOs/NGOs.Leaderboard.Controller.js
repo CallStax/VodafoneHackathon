@@ -10,8 +10,6 @@
 
         $scope.labels = ["Food", "Appliances", "Clothes", "Cleanliness"];
         $scope.data = [300, 40, 100, 210];
-
-        NGOsService.getData();
     }
 
 }());

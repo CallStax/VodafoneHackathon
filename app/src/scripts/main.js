@@ -69,7 +69,7 @@ require('./NGOs/NGOs.Module.js');
                 })
                 .when('/NGOs/ListofBeneficiaryRequests', {
                     templateUrl: 'NGOs/NGOs.ListofBeneficiaryRequests.html',
-                    controller: 'ListOnboardingRequestsController'
+                    controller: 'ListOfBeneficiaryRequestsController'
                 });
         });
 }());

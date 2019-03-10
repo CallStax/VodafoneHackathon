@@ -4,14 +4,19 @@
     angular.module('Benefactors').controller('SignupController', SignupController);
 
 
-    SignupController.$inject = ['$scope', 'BenefactorService', '$location']
+    SignupController.$inject = ['$scope', 'BenefactorService', '$location', '$rootScope']
 
-    function SignupController($scope, BenefactorService, $location) {
+    function SignupController($scope, BenefactorService, $location, $rootScope) {
         $scope.Benefactor = {};
 
-        $scope.registerBenefactor = function () {
-            BenefactorService.registerBenefactor($scope.Benefactor.companyName, $scope.Benefactor.email, $scope.Benefactor.phone, $scope.Benefactor.mobile, $scope.Benefactor.service);
-            $location.path('/Benefactors/Listofrequests');
+        $scope.requestBenefactor = function () {
+			
+            BenefactorService.requestBenefactor($scope.Benefactor.name, $scope.Benefactor.email, $scope.Benefactor.phone).then(function(response){
+				$scope.$apply(function() { $location.path('/Benefactors/Listofrequests'); });
+			}).catch(function(err){
+				alert('an unexpected error occurred');
+				console.log(err);
+			});
         }
 
         $scope.TextData = {
@@ -61,6 +66,19 @@
             }
 
         };
-    }
-
+		
+		function activate(){
+			if($rootScope.userType == 2){
+				$location.url('/Benefactors/Listofrequests');
+			}
+			else if($rootScope.userType == 0){
+				// guest users should have possibility to sign up
+			}
+			else {
+				$location.url('/');
+			}
+		}
+		
+		activate();
+	}
 }());

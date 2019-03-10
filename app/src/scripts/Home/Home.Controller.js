@@ -3,9 +3,9 @@
 
     angular.module('Home').controller('HomeController', HomeController);
 
-    HomeController.$inject = ['$scope', '$window', '$rootScope', '$location'];
+    HomeController.$inject = ['$scope', '$window', '$rootScope', '$location', 'BeneficiaryService'];
 
-    function HomeController($scope, $window, $rootScope, $location){
+    function HomeController($scope, $window, $rootScope, $location, BeneficiaryService){
         $scope.Home = '';
 		
         $scope.TextData = 
@@ -22,6 +22,10 @@
                     en: 'Click here',
                     mt: 'Għafas hawn'
                 },
+				button_big_change_industry: {
+                    en: 'Update preferences',
+                    mt: 'Ibled il-preferenzi'
+				},
                 buttons_p1: {
                     en: 'Your request will go to one of our NGOs who will reach out to you to assess your case and determine how best to help you.',
                     mt: 'It-talba tiegħek se tingħata lil NGOs tagħna li ser jevalwaw l - każ tiegħek u jiddeterminaw kif l-aħjar jgħinnuk.'
@@ -61,9 +65,23 @@
 
             };
 
-        $scope.UpdateLocation = function () {
-            console.log("Hello");
-            $location.path('/Beneficiary/Request');
+			$scope.RedirectToUpdateIndustry = function() {
+				$location.url('/Beneficiary/Request');
+			};
+			
+        $scope.RequestBeneficiary = function () {
+			console.log($rootScope.userType);
+			
+            var r = confirm("By proceeding your request will be sent to NGOs. Please verify you want to continue!");
+			console.log(r);
+			if (r == true) {
+			  BeneficiaryService.requestBeneficiary().then(function(response){
+				  $scope.$apply(function() { $location.url('/Beneficiary/Request'); });
+			  }).catch(function(err){
+				  alert('An unexpected error occured');
+				  console.log(err);
+			  });
+			}
         }
     }
 

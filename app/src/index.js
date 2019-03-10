@@ -32,7 +32,7 @@ angular.element(document).ready(() => {
 
   window.getInstance = async function() {
     var accounts = await web3js.eth.getAccounts();
-
+		
     var ghajnunaContract = new web3js.eth.Contract(
       window.abi,
       window.contractAddress.address

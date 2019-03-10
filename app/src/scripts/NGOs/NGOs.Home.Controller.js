@@ -3,10 +3,9 @@
 
     angular.module('NGOs').controller('NGOsHomeController', NGOsHomeController);
 
-    NGOsHomeController.$inject = ['$scope', 'NGOsService', '$location'];
+    NGOsHomeController.$inject = ['$scope', '$rootScope', 'NGOsService', '$location'];
 
-    function NGOsHomeController($scope, NGOsService, $location) {
-		console.log(NGOsService);
+    function NGOsHomeController($scope, $rootScope, NGOsService, $location) {
         $scope.NGO = {};
         // $scope.TextData = 
             // {
@@ -21,17 +20,31 @@
 			// };
 
         $scope.registerNgo = function () {
-            NGOsService.requestNGO($scope.NGO.name, $scope.NGO.volnum, $scope.NGO.services);
-            $location.path('/NGOs/ListOnboardingRequests');
-        }
-
-		
-		NGOsService.getNGOs().then(function(response){
-			$scope.$apply(function() {
-				$scope.NGOs = response;
-				console.log(response);
+            NGOsService.requestNGO($scope.NGO.name, $scope.NGO.volNum).then(function(response){
+				$scope.$apply(function() {
+					$location.path('/NGOs/ListOnboardingRequests');
+				});
+			}).catch(function(err){					
+				alert('an unexpected error occurred');
+				console.log(err);
 			});
-		}); 
+        }
+		
+		function activate(){
+			if($rootScope.userType == 1){
+				$location.path('/NGOs/ListofBeneficiaryRequests');
+			}
+			else if($rootScope.userType == 0){
+				console.log('b');
+				// guest users should have possibility to sign up
+			}
+			else {
+				console.log('c');
+				$location.url('/');
+			}
+		}
+		
+		activate();
         
     };
 
