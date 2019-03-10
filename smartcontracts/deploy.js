@@ -17,16 +17,20 @@ const deploy = async () => {
 	
 	const contractInstance = await new web3.eth.Contract(abi, contractAddress);
 	
-	await contractInstance.methods.registerIndustry('FOOD', 'Food and Catering').send({from: accounts[0], gasLimit: 3000000});
-	await contractInstance.methods.registerIndustry('CLOTHES', 'Food and Catering').send({from: accounts[0], gasLimit: 3000000});
-	await contractInstance.methods.registerIndustry('APPL', 'Appliances').send({from: accounts[0], gasLimit: 3000000});
-	await contractInstance.methods.registerIndustry('HYGIENE', 'Hygiene').send({from: accounts[0], gasLimit: 3000000});
+	//0 - Vodafone Malta Foundation
+	//1 - Millenium Chapel
+	//2 - Food Bank
+	//3 - Charitas
 	
 	await contractInstance.methods.registerIndustry('FOOD', 'Food and Catering').send({from: accounts[0], gasLimit: 3000000});
 	await contractInstance.methods.registerIndustry('CLOTHES', 'Food and Catering').send({from: accounts[0], gasLimit: 3000000});
 	await contractInstance.methods.registerIndustry('APPL', 'Appliances').send({from: accounts[0], gasLimit: 3000000});
 	await contractInstance.methods.registerIndustry('HYGIENE', 'Hygiene').send({from: accounts[0], gasLimit: 3000000});
 	
+	await contractInstance.methods.requestNGO('Millenium Chapel', 'VO/0022').send({from: accounts[1], gasLimit: 3000000});
+	await contractInstance.methods.requestNGO('Food Bank', 'VO/0018').send({from: accounts[2], gasLimit: 3000000});
+	await contractInstance.methods.requestNGO('Caritas', 'VO/0032').send({from: accounts[3], gasLimit: 3000000});
+
   console.log('Contract deployed to', contractAddress);
 };
 deploy();

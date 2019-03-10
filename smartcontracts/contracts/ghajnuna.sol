@@ -106,7 +106,7 @@ contract Ghajnuna{
     }
     
     //Functions for NGOs
-    function requestNGO(string memory ngoName, string memory voNumber) public requireAdministrativeNGO {
+    function requestNGO(string memory ngoName, string memory voNumber) public {
         ngos[msg.sender].ngoAddress = msg.sender;
         ngos[msg.sender].name = ngoName;
         ngos[msg.sender].voNumber = voNumber;
@@ -114,15 +114,15 @@ contract Ghajnuna{
         ngos[msg.sender].isApproved = false;
         ngos[msg.sender].isSysAdmin = false;
 
-        emit ngoRegistered(ngoAddress, ngoName, voNumber, true, false, false);
+        emit ngoRegistered(msg.sender, ngoName, voNumber, true, false, false);
     }
 
     function updateNGOIndustries(bytes32[] memory chosenIndustries) public {
-        require(ngos[ngoAddress].isSet);
+        require(ngos[msg.sender].isSet);
 
-        ngos[ngoAddress].industries = chosenIndustries;
+        ngos[msg.sender].industries = chosenIndustries;
 
-        emit ngoIndustriesRecevied(ngoAddress, chosenIndustries);
+        emit ngoIndustriesRecevied(msg.sender, chosenIndustries);
     }
 
     function approveNGO(address ngoAddress) public requireAdministrativeNGO {
