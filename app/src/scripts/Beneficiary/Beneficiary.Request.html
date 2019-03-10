@@ -4,17 +4,15 @@
 
 <form id="userRequestsForm">
 
-    <div ng-repeat="userRequest in UserRequests">
-        <label><input type="checkbox" ng-model="ChosenUserRequests.selected[$index]" ng-true-value="'{{userRequest}}'" ng-false-value="''">{{userRequest}}</label>
+    <div ng-repeat="industry in Industries">
+        <label><input type="checkbox" ng-model="ChosenIndustries.selected[$index]" ng-true-value="'{{industry}}'" ng-false-value="''">{{industry}}</label>
 
     </div>
 
     <textarea rows="4" cols="50" placeholder="Provide further details here..."></textarea>
 
     <br />
-
-
-
+    
     <br />
 
     <button type="reset" id="resetButton">Reset</button>
