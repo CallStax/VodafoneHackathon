@@ -37,11 +37,11 @@ contract Ghajnuna{
         address[] approvedBy;
     }
 
-    struct Course {
-        bytes32 id;
-        string name;
-        string description;
-    }
+    // struct Course {
+        // bytes32 id;
+        // string name;
+        // string description;
+    // }
     
     //NGOs
     address[] private allNgos;
@@ -63,9 +63,9 @@ contract Ghajnuna{
     
 
     // Courses
-    bytes32[] private allCourses;
-    mapping(bytes32 => Course) private courses;
-    mapping(address => bytes32[]) private coursesTakenByUser;
+    // bytes32[] private allCourses;
+    // mapping(bytes32 => Course) private courses;
+    // mapping(address => bytes32[]) private coursesTakenByUser;
     
     //Approved beneficiaries
     //mapping(address(NGO) => address[](beneficiaries))
@@ -90,8 +90,8 @@ contract Ghajnuna{
     event benefactorRegistered(address benefactorAddress, string name, bool isSet, bool isApproved);
     event benefactorIndustriesReceived(address benefactorAddress, bytes32[] industries);
     event benefactorApproved(address benefactorAddress);
-    event courseCreated(bytes32 id, string name, string description);
-    event userEnrolledToCourse(address userAddress, bytes32 courseId);
+    // event courseCreated(bytes32 id, string name, string description);
+    // event userEnrolledToCourse(address userAddress, bytes32 courseId);
 
     //Constructor
     constructor(string memory ngoName, string memory voNumber) public {
@@ -168,8 +168,9 @@ contract Ghajnuna{
         emit industryRegistered(id, code, description, true);
     }
 
-    function getIndustry(bytes32 industryId) view public returns(bytes32, string memory, string memory, bool) {
-        return (industries[industryId].id, industries[industryId].code, industries[industryId].description, industries[industryId].isSet);
+    function getIndustry(bytes32 industryId) view public returns(string memory, string memory) {
+		require(industries[industryId].isSet);
+        return (industries[industryId].code, industries[industryId].description);
     }
 
     function getIndustries() view public returns(bytes32[] memory) {
@@ -247,6 +248,18 @@ contract Ghajnuna{
     function getBenefactors() view public returns(address[] memory){
         return allBenefactors;
     }
+	
+	function getUserType() view public returns(uint) {
+		if (ngos[msg.sender].isSet){
+			return 1;
+		} else if (benefactors[msg.sender].isSet){
+			return 2;
+		} else if (beneficiaries[msg.sender].isSet){
+			return 3;
+		} else {
+			return 0;
+		}
+	}
     
     //Modifiers
     modifier requireNGO(){
