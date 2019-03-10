@@ -3,9 +3,9 @@
 
     angular.module('Course').controller('SelfImprovementController', SelfImprovementController);
 
-    SelfImprovementController.$inject = ['$scope', 'CourseService'];
+    SelfImprovementController.$inject = ['$scope', 'CourseService', 'UserService'];
 
-    function SelfImprovementController($scope, CourseService) {
+    function SelfImprovementController($scope, CourseService, UserService) {
         $scope.AvailableCourses = [
             "Course 1",
             "Course 2",
@@ -31,7 +31,11 @@
         }
 
         function activate(){
-            $scope.GetAllCourses();
+           // $scope.GetAllCourses();
+
+            UserService.getUserType().then(function(result){
+                console.log(result);
+            });
         }
 
         activate();
