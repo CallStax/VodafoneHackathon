@@ -28,4 +28,6 @@ let compiledResult = JSON.parse(compiledData);
 
 let compiledContract = compiledResult.contracts.Task.Ghajnuna;
 
+console.log(compiledContract);
+
 module.exports = compiledContract;

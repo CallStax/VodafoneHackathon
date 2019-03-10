@@ -1,22 +1,21 @@
-<h2>Request Service</h2>
+<h2>{{TextData.title[language]}}</h2>
 <hr />
-<p class="lead">Tick the industries needed.</p>
+<p class="lead">{{TextData.heading[language]}}</p>
 
 <form id="userRequestsForm">
+    <table class="item-list">
+        <tr ng-repeat="industry in Industries">
+			<td class="label">{{industry}}</td>
+			<td class="input"><input type="checkbox" ng-model="ChosenIndustries.selected[$index]" ng-true-value="'{{industry}}'" ng-false-value="''" /></td>
+		</tr>
+    </table>
 
-    <div ng-repeat="userRequest in UserRequests">
-        <label><input type="checkbox" ng-model="ChosenUserRequests.selected[$index]" ng-true-value="'{{userRequest}}'" ng-false-value="''">{{userRequest}}</label>
-
-    </div>
-
-    <textarea rows="4" cols="50" placeholder="Provide further details here..."></textarea>
+	<hr/>
+	
+    <textarea rows="4" cols="50" placeholder="{{TextData.text_placeholder[language]}}"></textarea>
 
     <br />
 
-
-
-    <br />
-
-    <button type="reset" id="resetButton">Reset</button>
-    <button type="submit" id="submitButton" ng-click="SubmitForm()">Submit</button>
+    <button type="reset" id="resetButton">{{TextData.reset[language]}}</button>
+    <button type="submit" id="submitButton" ng-click="SubmitForm()">{{TextData.submit[language]}}</button>
 </form>

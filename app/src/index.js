@@ -26,8 +26,7 @@ angular.element(document).ready(() => {
 	  window.contractAddress = contractAddress;
 	  window.abi = abi;
 	  
-	  	window.getInstance =  async function(){
-			
+	  	window.getInstance =  async function(){			
 		  
 		  var accounts = await web3js.eth.getAccounts();
 			
