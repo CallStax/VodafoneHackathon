@@ -3,10 +3,15 @@
 
     angular.module('Benefactors').controller('SignupController', SignupController);
 
-    SignupController.$inject = ['$scope'];
-          
-    function SignupController($scope){
-        $scope.Home = '';
+
+    SignupController.$inject = ['$scope', 'BenefactorService']
+
+    function SignupController($scope, BenefactorService) {
+        $scope.Benefactor = {};
+
+        $scope.sendBenefactorData = function () {
+            BenefactorService.sendBenefactorData($scope.Benefactor.companyName, $scope.Benefactor.email, $scope.Benefactor.phone, $scope.Benefactor.mobile, $scope.Benefactor.service);
+        }
 
         $scope.TextData = {
             h2: {

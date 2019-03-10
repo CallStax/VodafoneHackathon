@@ -9,9 +9,10 @@
 		
 
 		
-        return {
-            getData: getData,
-			getNGOs: getNGOs
+        return {           
+            getNGOs: getNGOs,
+            getNGOApprovalsForBeneficiaries: getNGOApprovalsForBeneficiaries
+
         }
 		
 
@@ -22,9 +23,15 @@
 		
 		async function getNGOs() {
 			var result = await window.getInstance();
-			return result.ghajnunaContract.methods.getNGOs().call();	
-		 
-		}
+			return result.ghajnunaContract.methods.getNGOs().call();			 
+        }
+
+        async function getNGOApprovalsForBeneficiaries() {
+            var result = await window.getInstance();
+            return result.ghajnunaContract.methods.getNGOApprovalsForBeneficiaries().call();
+        }
+
+
     }
 
 }());
