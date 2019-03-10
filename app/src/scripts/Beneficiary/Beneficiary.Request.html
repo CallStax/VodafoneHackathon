@@ -4,19 +4,15 @@
 
 <form id="userRequestsForm">
     <table class="item-list">
-        <tr ng-repeat="userRequest in UserRequests">
-			<td class="label">{{userRequest}}</td>
-			<td class="input"><input type="checkbox" ng-model="ChosenUserRequests.selected[$index]" ng-true-value="'{{userRequest}}'" ng-false-value="''" /></td>
+        <tr ng-repeat="industry in Industries">
+			<td class="label">{{industry}}</td>
+			<td class="input"><input type="checkbox" ng-model="ChosenIndustries.selected[$index]" ng-true-value="'{{industry}}'" ng-false-value="''" /></td>
 		</tr>
     </table>
 
 	<hr/>
 	
     <textarea rows="4" cols="50" placeholder="{{TextData.text_placeholder[language]}}"></textarea>
-
-    <br />
-
-
 
     <br />
 
