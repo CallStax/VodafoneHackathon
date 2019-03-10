@@ -62,6 +62,9 @@ const deploy = async () => {
 	await contractInstance.methods.approveNGO(accounts[3]).send({from: accounts[0], gasLimit: 3000000});
 	await contractInstance.methods.updateNGOIndustries([industries['CLOTHES'].Id, industries['HYGIENE'].Id]).send({from: accounts[1], gasLimit: 3000000});
 	
+	
+	
+	
   console.log('Contract deployed to', contractAddress);
 };
 deploy();
