@@ -43,6 +43,7 @@ describe('Ghajnuna - Setup', () => {
 
 describe('Ghajnuna - NGO Admin', () => {
 
+
 	it('allows admin ngo to register new ngo', async () => {
 		await ghajnuna.methods.requestNGO(accounts[1], 'Test NGO', 'VO/9999').send({ from: accounts[0], gas: 3000000 });
 
@@ -98,7 +99,33 @@ describe('Ghajnuna - NGO Admin', () => {
 		}
 	});
 
-	it('prevents non-admin ngo to set non-admin ngo as admin', async () => {
+
+  it('allows admin ngo to register new ngo', async () => {
+    await ghajnuna.methods.registerNGO(accounts[1], 'Test NGO', 'VO/9999').send({ from: accounts[0], gas: '1000000' });
+	
+	const ngo = await ghajnuna.methods.getNGO(accounts[1]).call();
+	assert.equal(ngo[0], 'Test NGO');
+	assert.equal(ngo[1], 'VO/9999');
+	assert.equal(ngo[2], true); //Is Set 
+	assert.equal(ngo[3], false); //is Sys Admin
+  });
+  
+  it('allows admin ngo to set non-admin ngo as admin', async () => {
+	await ghajnuna.methods.registerNGO(accounts[1], 'Test NGO', 'VO/9999').send({ from: accounts[0], gas: '1000000' });
+	
+    await ghajnuna.methods.makeNGOAdmin(accounts[1]).send({ from: accounts[0], gas: '1000000' });
+	
+	const ngo = await ghajnuna.methods.getNGO(accounts[1]).call();
+
+	//perform sanity checks
+	assert.equal(ngo[0], 'Test NGO');
+	assert.equal(ngo[1], 'VO/9999');
+	assert.equal(ngo[2], true); //Is Set
+	assert.equal(ngo[3], true); //Is Sys Admin
+  });
+ 
+  it('prevents non-admin ngo to set non-admin ngo as admin', async () => {
+
 		//Register account[1] as non admin NGO
 		await ghajnuna.methods.requestNGO(accounts[1], 'Test NGO', 'VO/9999').send({ from: accounts[0], gas: 3000000 });
 

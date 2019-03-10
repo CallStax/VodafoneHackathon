@@ -22,7 +22,9 @@ let jsonContractSource = JSON.stringify({
     },
 });
 
-let compiledResult = JSON.parse(solc.compile(jsonContractSource));
+let compiledData = solc.compile(jsonContractSource);
+
+let compiledResult = JSON.parse(compiledData);
 
 let compiledContract = compiledResult.contracts.Task.Ghajnuna;
 

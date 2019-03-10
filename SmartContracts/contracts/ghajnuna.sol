@@ -90,6 +90,7 @@ contract Ghajnuna{
 		return (ngos[ngoAddress].name, ngos[ngoAddress].voNumber, ngos[ngoAddress].isSet, ngos[ngoAddress].isApproved, ngos[ngoAddress].isSysAdmin);
 	}
 
+
     function registerIndustry(string memory code, string memory description) public requireAdministrativeNGO {
         bytes32 id = keccak256(abi.encodePacked(msg.sender, code, description));
 
@@ -146,6 +147,13 @@ contract Ghajnuna{
         return (benefactors[benefactorAddress].name, benefactors[benefactorAddress].industries, benefactors[benefactorAddress].isSet);
     }
     
+
+	
+	function getNGOs() view public returns(address[] memory){
+	    return allNgos;
+	}
+	    
+
     //Modifiers
     modifier requireNGO(){
         require((ngos[msg.sender].isSet), "Only NGOs are able To run this function");
